@@ -14,18 +14,14 @@ class Gerenciar_Usuario {
   // se existir, passar por todo o arquivo onde vai ser armazenado os perfis existentes ate encontrar o email de entrada
   // quando encontrar, remover todos os livros que estão emprestados dos alugados e excluir todas as informações de cadastro desse perfil 
 
-  /*
-  * @brief alterar os dados de um perfil
-  /*
+  // @brief alterar os dados de um perfil
 
   void Alterar_Perfil (std::string email,std::string nome,std::string livros_alugados);
 
   //verificar se existe algum perfil com o email de entrada
   //se existir, igualas todos os seus dados para os que entram na função acima
 
-  /*
-  * @brief imprimir todos os perfis
-  /*
+  // @brief imprimir todos os perfis
 
   char Imprimir_Perfis ();
 
