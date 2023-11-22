@@ -1,6 +1,7 @@
 #include "gerenciarUsuário.hpp"
 
-void 
+void gerenciarUsuario::deletarPerfil (std::string _email){
+    
 // verifica se o id não é do próprio admin, e depois se existe algum usuario com esse id
     if (this->get_email_perfil_usuario() == email)
     {
