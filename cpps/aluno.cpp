@@ -1,121 +1,45 @@
-#include "../include/aluno.h"
-
+#include "aluno.hpp"
 #include <iostream>
-#include <iomanip>
+#include <fstream>
 
-Aluno::Aluno(std::string email) : Perfil_usuario(email)
+Aluno::Aluno(const std::string& nome, const std::string& email, const std::string& matricula)
+    : Perfil_usuario(nome, email), _matricula(matricula)
 {
-    this->_papel = ALUNO;
-    salvar_aluno_no_arquivo();
+    // Mantém o papel padrão como ALUNO
+    _papel = ALUNO;
 }
 
-Aluno::~Aluno()
+const std::string& Aluno::getMatricula() const
 {
-    for (auto it : livros_com_aluno)
-    {
-        delete it;
-    }
-    livros_com_aluno.clear();
+    return _matricula;
 }
 
-
-void Aluno::get_livros_com_aluno()
-{
-    for (auto it : this->livros_com_aluno)
-    {
-        std::cout << std::endl
-                  << it->get_titulo() << " ," << it->get_autor() << std::endl;
-    }
-    std::cout << "sem livros" << std::endl;
+void Aluno::emprestarLivro(const std::string& titulo) {
+   // _livros_emprestados.pushback(titulo);
 }
 
-int Aluno::get_n_exemplares()
-{
-    return this->livros_com_aluno.size();
+void Aluno::devolverLivro(const std::string& titulo) {
+
+}
+const std::vector <std::string>& Aluno::getLivrosEmprestados() const {
+    return _livros_emprestados; 
 }
 
-void Aluno::emprestar_livro(Exemplar *livro)
-{
-    if (this->livros_com_aluno.size() > 5)
-        throw ja_possui_mutos_livros_e();
-    for (auto l : livros_com_aluno)
-    {
-        livros_com_aluno.push_back(livro);
-    }
-}
+int Aluno::salvar_aluno() {
+    // Cria um objeto ofstream e o associa ao arquivo "usuario.csv"
+    std::ofstream arquivo("usuario.csv", std::ios::out | std::ios::app);
 
-void Aluno::devolver_livro(int codigo)
-{
-    bool p = true;
-    for (auto l : this->livros_com_aluno)
-        if (l->get_codigo() == codigo)
-            p = false;
-    if (p)
-    {
-        throw nao_possui_esse_livro_e();
+    // Verifica se o arquivo foi aberto com sucesso
+    if (!arquivo.is_open()) {
+        std::cerr << "Erro ao abrir o arquivo CSV.\n";
+        return -1; // Retorna um código de erro, se necessário
     }
 
-    int i = 0;
-    for (auto l : livros_com_aluno)
-    {
-        if (l->get_codigo() == codigo)
-            livros_com_aluno.erase(livros_com_aluno.begin() + i);
-        i++;
-    }
-}
+    // Escreve as informações do aluno no arquivo CSV
+    arquivo << "ALUNO," << getNome_usuario() << "," << getEmail_usuario() << "," << getMatricula() << "\n";
 
-void Aluno::consultar_acervo(std::string titulo) // pro aluno so retorna codigo, titulo e autor, e # exemplares disponiveis
-{
-    std::ifstream arquivo_acervo("files/acervo.csv");
-    if (!arquivo_acervo)
-    {
-        std::cout << "Falha ao abrir o arquivo" << std::endl;
-        return;
-    }
+    // Fecha o arquivo automaticamente ao sair do escopo
+    // devido à utilização do objeto std::ofstream
 
-    std::string linha;
-    while (getline(arquivo_acervo, linha))
-    {
-        std::istringstream iss(linha);
-        std::string codigo, autor, titulo_csv, ano_publicacao, genero;
-
-        if (getline(iss, codigo, ',') &&
-            getline(iss, autor, ',') &&
-            getline(iss, titulo_csv, ',') &&
-            getline(iss, ano_publicacao, ',') &&
-            getline(iss, genero, ','))
-        {
-            if (titulo_csv == titulo)
-            {
-                int codigo_int = std::stoi(codigo);
-
-                std::cout << "Acervo encontrado:\n";
-                std::cout << "Código: " << codigo_int << '\n';
-                std::cout << "Título: " << titulo << '\n';
-                std::cout << "Autor: " << autor << '\n';
-            }
-        }
-    }
-
-    arquivo_acervo.close();
-}
-
-
-int Aluno::salvar_aluno_no_arquivo()
-{
-    std::ofstream aluno_out;
-    aluno_out.open("usuarios.csv", std::ios_base::app);
-    if (!aluno_out)
-    {
-        std::cout << "arquivo nao existe" << std::endl;
-        return 0;
-    }
-    else
-    {
-        aluno_out << this->get_ID_perfil_usuario() << ","
-                  << this->get_email_perfil_usuario() << "," << this->get_senha_perfil_usuario() << "," << this->get_senha_perfil_usuario() << std::endl;
-
-        aluno_out.close();
-        return 1;
-    }
+    return 0; // Retorna 0 para indicar sucesso
 }
