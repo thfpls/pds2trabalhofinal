@@ -43,5 +43,25 @@ void gerenciarUsuario::deletarPerfil (std::string _email){
 }
 
 void gerenciarUsuario::alterarPerfil (std::string _email, std::string _nome, std::string _livrosAlugados){
-          
-  
+    std::ifstream arquivo_usuarios("files/usuarios.csv");
+    email=_email;
+    nome=_nome;
+    livrosAlugados=_livrosAlugados;
+}
+
+void gerenciarUsuario::imprimirPerfil (){
+    std::ifstream arquivo_usuarios("files/usuarios.csv");
+    if (!arquivo_usuarios) {
+        std::cout << "Falha ao abrir o arquivo" << std::endl;
+        return;
+    }
+
+    std::string linha;
+    while (getline(arquivo_usuarios, linha)){
+        std::cout << this->get_email_perfil_usuario() << "," 
+                  << this->get_nome_perfil_usuario() << "," 
+                  << this->get_livros_alugados_perfil_usuario()<<std::endl;
+    }
+    arquivo_usuarios.close();
+}
+
