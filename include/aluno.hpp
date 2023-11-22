@@ -1,7 +1,9 @@
+//aluno.hpp
 #ifndef ALUNO_HPP
 #define ALUNO_HPP
 #include "perfil_usuario.hpp"
 #include <vector>
+#include <string>
 
 class Aluno : public Perfil_usuario {
 private:
@@ -23,6 +25,6 @@ public:
 
     int salvar_aluno(); 
 
-
+    static void criarEsalvarNovoAluno();
 };
 #endif // ALUNO_HPP
