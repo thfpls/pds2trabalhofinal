@@ -7,7 +7,7 @@ class Livro {
 public:
     Livro(const std::string& titulo, const std::string& autor, int anoPublicacao);
 
-    // Métodos de acesso
+    // @brief informações necessárias que o livro terá
     std::string getTitulo() const;
     std::string getAutor() const;
     int getAnoPublicacao() const;
