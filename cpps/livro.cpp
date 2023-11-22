@@ -19,8 +19,26 @@ bool Livro::estaAlugado() const {
     return alugado;
 }
 
+std::string Livro::getStatus() const {
+    return status;
+}
+
 void Livro::alterarLivro(const std::string& novoTitulo, const std::string& novoAutor, int novoAnoPublicacao) {
     titulo = novoTitulo;
     autor = novoAutor;
     anoPublicacao = novoAnoPublicacao;
+}
+
+void Livro::alugar() {
+    if (!alugado) {
+        alugado = true;
+        status = "ALUGADO";
+    }
+}
+
+void Livro::devolver() {
+    if (alugado) {
+        alugado = false;
+        status = "DISPONÍVEL";
+    }
 }
