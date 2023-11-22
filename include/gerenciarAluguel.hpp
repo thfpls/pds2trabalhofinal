@@ -1,21 +1,27 @@
-#include "aluguel.hpp"
-#include "livro.hpp"
-#include "perfil_de_usuario.hpp"
+#ifndef GERENCIAR_ALUGUEL_HPP
+#define GERENCIAR_ALUGUEL_HPP
 
+#include <map>
 #include <string>
+#include <iostream>
 
-class gerenciarAluguel{
-    public:
-        //alocar um livro, mudando sua chave no map do acervo para alugado
-        void alugarLivro(std::string Titulo, int prazo);
+class GerenciarAluguel {
+public:
+    // Adiciona um livro ao mapa de livros alugados
+    void alugarLivro(const std::string& titulo, const std::string& disponibilidade);
 
-        //alocar um livro, mudando sua chave no map do acervo para não alugado
-        void devolverLivro(std::string Titulo);
+    // Remove um livro do mapa de livros alugados
+    void devolverLivro(const std::string& titulo, const std::string& disponibilidade);
 
-        //aumenta o prazo estabelecido para o aluguel
-        void aumentarPrazo(int prazo, int novoPrazo);
+    // Aumenta o prazo de devolução para um livro específico
+    void aumentarPrazo(const std::string& titulo, const std::string& disponibilidade, int dias);
 
-        //estipula uma multa para um usuário 
-        void definirMulta(int multa, std::string nome);
+    // Define uma multa para um livro específico
+    void definirMulta(const std::string& titulo, const std::string& disponibilidade, double multa);
 
+private:
+    // Mapa para armazenar livros alugados, a chave é uma combinação de título e disponibilidade
+    std::map<std::pair<std::string, std::string>, std::pair<int, double>> livrosAlugados;
 };
+
+#endif // GERENCIAR_ALUGUEL_HPP
