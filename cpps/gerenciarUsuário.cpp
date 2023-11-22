@@ -43,4 +43,5 @@ void gerenciarUsuario::deletarPerfil (std::string _email){
 }
 
 void gerenciarUsuario::alterarPerfil (std::string _email, std::string _nome, std::string _livrosAlugados){
-    
+          
+  
