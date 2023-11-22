@@ -15,6 +15,7 @@ class Gerenciar_Usuario {
   // quando encontrar, remover todos os livros que estão emprestados dos alugados e excluir todas as informações de cadastro desse perfil 
 
   // @brief alterar os dados de um perfil
+  // @param email, nome, livros alugados do usuário
 
   void Alterar_Perfil (std::string email,std::string nome,std::string livros_alugados);
 
