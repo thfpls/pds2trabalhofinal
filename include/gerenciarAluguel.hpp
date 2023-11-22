@@ -1,6 +1,6 @@
 #include "aluguel.hpp"
 #include "livro.hpp"
-#include "usuario.hpp"
+#include "perfil_de_usuario.hpp"
 
 #include <string>
 
