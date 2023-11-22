@@ -1,4 +1,5 @@
 #include "estudante.hpp"
+#include "livro.hpp"
 #include "gerenciarAluguel.hpp"
 
 #include <string>
