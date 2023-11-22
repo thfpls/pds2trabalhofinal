@@ -24,11 +24,3 @@ void Livro::alterarLivro(const std::string& novoTitulo, const std::string& novoA
     autor = novoAutor;
     anoPublicacao = novoAnoPublicacao;
 }
-
-void Livro::alugar() {
-    alugado = true;
-}
-
-void Livro::devolver() {
-    alugado = false;
-}
