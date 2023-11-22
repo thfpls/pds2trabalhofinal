@@ -9,7 +9,7 @@ class Aluguel {
   void checarDisponibilidade (std:: string Titulo; std:: string Disponibilidade);
 
   // @brief mostrar as informaçoes de aluguel do livro, caso a função acima der como Alugado
-  void imprimirStatus (std:: string Titulo; std:: string Disponibilidade; std:: string Usuario;
+  void mudarStatus (std:: string Titulo; std:: string Disponibilidade; std:: string Usuario;
   std:: string Prazo)
 
   private:
