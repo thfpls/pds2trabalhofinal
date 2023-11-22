@@ -1,6 +1,6 @@
 #ifndef LIVRO_HPP
 #define LIVRO_HPP
-
+#include <iostream>
 #include <string>
 
 class Livro {
