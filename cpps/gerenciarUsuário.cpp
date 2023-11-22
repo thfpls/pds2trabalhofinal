@@ -49,7 +49,7 @@ void gerenciarUsuario::alterarPerfil (std::string _email, std::string _nome, std
     livrosAlugados=_livrosAlugados;
 }
 
-void gerenciarUsuario::imprimirPerfil (){
+void gerenciarUsuario::imprimirPerfis (){
     std::ifstream arquivo_usuarios("files/usuarios.csv");
     if (!arquivo_usuarios) {
         std::cout << "Falha ao abrir o arquivo" << std::endl;
