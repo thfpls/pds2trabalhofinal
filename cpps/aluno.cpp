@@ -1,6 +1,8 @@
+//aluno.cpp
 #include "aluno.hpp"
 #include <iostream>
 #include <fstream>
+#include <string>
 
 Aluno::Aluno(const std::string& nome, const std::string& email, const std::string& matricula)
     : Perfil_usuario(nome, email), _matricula(matricula)
@@ -42,4 +44,29 @@ int Aluno::salvar_aluno() {
     // devido à utilização do objeto std::ofstream
 
     return 0; // Retorna 0 para indicar sucesso
+}
+
+void Aluno::criarEsalvarNovoAluno() {
+    // Solicitar informações do usuário
+    std::string nome, email, matricula;
+
+    std::cout << "Digite o nome do aluno: ";
+    std::getline(std::cin, nome);
+
+    std::cout << "Digite o email do aluno: ";
+    std::getline(std::cin, email);
+
+    std::cout << "Digite a matrícula do aluno: ";
+    std::getline(std::cin, matricula);
+
+    // Criar um aluno dinamicamente com base nas informações do usuário
+    Aluno novoAluno(nome, email, matricula);
+
+    // Salvar as informações do aluno no arquivo CSV
+    if (novoAluno.salvar_aluno() == 0) {
+        std::cout << "Aluno salvo no arquivo CSV com sucesso.\n";
+    }
+    else {
+        std::cerr << "Erro ao salvar o aluno no arquivo CSV.\n";
+    }
 }
