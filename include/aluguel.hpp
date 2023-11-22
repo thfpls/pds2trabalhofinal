@@ -1,4 +1,3 @@
-#include "estudante.hpp"
 #include "livro.hpp"
 #include "gerenciarAluguel.hpp"
 
@@ -6,7 +5,7 @@
 
 class Aluguel {
   public:
-  // @brief conferir se algum livro está alugado, checando com a função do estudante.hpp
+  // @brief conferir se algum livro está alugado, checando com a função de livro.hpp
   void checarDisponibilidade (std:: string Titulo; std:: string Disponibilidade);
 
   // @brief mostrar as informaçoes de aluguel do livro, caso a função acima der como Alugado
