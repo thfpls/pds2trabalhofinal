@@ -9,19 +9,6 @@ void gerenciarUsuario::deletarPerfil (std::string _email){
     }
     else
     {
-
-        // bool b = true;
-        //  for(todos os usuario do bd) if(usuario.get_ID_perfil_usuario()==id) b = false;
-        // if (b)
-        //    throw id_nao_existe_e();
-
-        /*for(*todos os usuario do bd) {
-            if(id do usuario == id) {
-                if(usuario for aluno) devolver todos os livros que estão com o aluno
-                deletar o usuario
-            }
-        }*/
-
         std::ifstream arquivo_usuarios("files/usuarios.csv");
         std::ofstream arquivo_atualizado("files/usuarios_temp.csv");
         std::string linha;
@@ -55,11 +42,5 @@ void gerenciarUsuario::deletarPerfil (std::string _email){
     }
 }
 
-void Admin::consultar_acervo(std::string)
-{
-    // nao pode acontecer nada aqui, admin nao liga pra livro
-}
-
-Admin::~Admin()
-{
-}
+void gerenciarUsuario::alterarPerfil (std::string _email, std::string _nome, std::string _livrosAlugados){
+    
