@@ -16,12 +16,6 @@ public:
     // @brief funções de alteração dos dados existentes de um livro
     void alterarLivro(const std::string& novoTitulo, const std::string& novoAutor, int novoAnoPublicacao);
 
-    // @brief alugar um livro disponível no acervo
-    void alugar();
-
-    // @brief retornar um livro alugado para o acervo
-    void devolver();
-
 private:
     std::string titulo;
     std::string autor;
