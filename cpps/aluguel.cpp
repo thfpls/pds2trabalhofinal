@@ -14,3 +14,6 @@ void Aluguel::checarDisponibilidade(const std::string& titulo) {
     }
     std::cout << "Livro não encontrado." << std::endl;
 }
+    // Se o livro não foi encontrado
+    std::cout << "Livro não encontrado. Aluguel não efetuado." << std::endl;
+}
