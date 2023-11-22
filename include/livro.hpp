@@ -12,6 +12,7 @@ public:
     std::string getAutor() const;
     int getAnoPublicacao() const;
     bool estaAlugado() const;
+    std::string getStatus() const;
 
     // @brief funções de alteração dos dados existentes de um livro
     void alterarLivro(const std::string& novoTitulo, const std::string& novoAutor, int novoAnoPublicacao);
