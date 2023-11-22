@@ -1,5 +1,5 @@
-#ifndef ADMINISTRADOR_HPP
-#define ADMINISTRADOR_HPP
+#ifndef ADM_HPP
+#define ADM_HPP
 
 //basicamente criar um adm para fim de herança
 
@@ -12,4 +12,4 @@ public:
 
     int salvar_adm();
 }; 
-#endif // ADMINISTRADOR_HPP
+#endif // ADM_HPP
