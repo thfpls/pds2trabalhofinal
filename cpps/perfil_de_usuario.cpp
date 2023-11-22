@@ -1,26 +1,29 @@
-#include "perfil_de_usuario.hpp"
 
-unsigned int Perfil_usuario::CONTADOR_ID_perfil_usuario = 0;
+#include "perfil_usuario.hpp"
+#include "aluno.hpp"
+//implementar o construtor
 
-Perfil_usuario::~Perfil_usuario() {}
-
-Perfil_usuario::Perfil_usuario(std::string email) : _email_perfil_usuario(email)
+Perfil_usuario::Perfil_usuario(const std::string& nome, const std::string& email) : _nome_perfil_usuario(nome), _email_perfil_usuario(email), _papel(ALUNO)
 {
-    _ID_perfil_usuario = CONTADOR_ID_perfil_usuario;
-    CONTADOR_ID_perfil_usuario++;
 }
 
-Papel_do_usuario Perfil_usuario::get_papel_usuario()
-{
-    return this->_papel;
+//métodos
+const std::string& Perfil_usuario::getNome_usuario() const {
+    return _nome_perfil_usuario;
 }
 
-unsigned int Perfil_usuario::get_ID_perfil_usuario()
-{
-    return this->_ID_perfil_usuario;
+const std::string& Perfil_usuario::getEmail_usuario() const {
+    return _email_perfil_usuario;
 }
 
-std::string Perfil_usuario::get_email_perfil_usuario()
-{
-    return this->_email_perfil_usuario;
+Papel_do_usuario Perfil_usuario::getPapel_usuario() const {
+    return _papel;
+}
+
+std::string Perfil_usuario::papelToString() const {
+    return (_papel == ADMIN) ? "ADMIN" : "ALUNO";
+}
+// destrutor virtual
+Perfil_usuario::~Perfil_usuario() {
+
 }
