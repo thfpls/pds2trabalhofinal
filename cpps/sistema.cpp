@@ -26,10 +26,13 @@ void Sistema::carregar_opcoes(){
   << std:: endl;
 
   std::cin >> entrada_opcoes;
+
+
   
   switch(entrada_opcoes){
     case 1: 
     std::cout << "Cadastrar Estudante \n" 
       << std::endl; 
+    //
     
 }
