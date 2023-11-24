@@ -38,7 +38,7 @@ void Sistema::carregar_opcoes(){
     case 1: 
     std::cout << "Cadastrar Estudante: \n" 
       << std::endl; 
-    Aluno::criarEsalvarNovoAluno();
+    Aluno::CadastroAluno();
 
     case 2: 
     std::cout << "Buscar Livro: \n" 
