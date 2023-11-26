@@ -46,7 +46,7 @@ void Sistema::menu_principal() {
     case 2:
         std::cout << "Buscar Livro: \n"
             << std::endl;
-        AcervoBiblioteca::verAcervo(); //acho que é isso CONFERIR
+        AcervoBiblioteca::verAcervo(); //rever essa busca
         break;
     case 3:
         std::cout << "Ver Acervo: \n"
@@ -62,7 +62,7 @@ void Sistema::menu_principal() {
     }
 }
 
-void Sistema::menu_de_busca() {
+void Sistema::menu_de_busca() { //essa função vai estar após a busca de um livro
     int opções_pós_busca;
     std::cout << "1. Alugar livro \n"
         << std::endl;
@@ -79,10 +79,16 @@ void Sistema::menu_de_busca() {
     case 1:
     std::cout << "Alugar livro: \n"
         << std::endl;
-    GerenciarAluguel::alugarLivro()// Vai dar problema, pensar como vai colocar 
+    GerenciarAluguel::alugarLivro()// nao vai funcionar so colocar essa função aqui 
 
     case 2:
     std::cout << "Alterar dado do livro: \n"
     << std::endl;
+    Livro::alterarLivro(); //nao vai funcionar so colocar essa função aqui 
+
+    case 3:
+     std::cout << "Realizar outra busca: \n"
+    << std::endl;
+    AcervoBiblioteca::verAcervo(); //rever essa busca
     
 }
