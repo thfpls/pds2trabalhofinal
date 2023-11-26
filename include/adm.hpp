@@ -16,8 +16,9 @@ public:
     Administrador(const std::string& nome, const std::string& email);
 
     int salvar_adm();
+    bool admJaExiste() const;
 
-    static void criarEsalvarNovoAdm();
+    static void CadastroAdm();
 };
 
 #endif // ADMINISTRADOR_HPP
