@@ -16,39 +16,66 @@ std::cout << "Ola! Bem vindo, Administrador \n"
   std::cout << "O que deseja fazer?"
   << std:: endl;
 
-  carregar_opcoes(); 
+  menu_principal(); 
 }
 
-void Sistema::carregar_opcoes(){
-  int entrada_opcoes; 
-  std::cout << "1. Cadastrar Estudante \n"
-  << std:: endl;
-  std::cout << "2. Buscar Livro \n" 
-  << std::endl;
-  std::cout << "3. Ver Acervo \n"
-  << std:: endl;
-  std::cout << "4. Configuracoes \n"
-  << std:: endl;
+void Sistema::menu_principal() {
+    int opções_menu_principal;
+    std::cout << "1. Cadastrar Estudante \n"
+        << std::endl;
+    std::cout << "2. Buscar Livro \n"
+        << std::endl;
+    std::cout << "3. Ver Acervo \n"
+        << std::endl;
+    std::cout << "4. Configuracoes \n"
+        << std::endl;
+    std::cout << "5. Sair do programa \n"
+        << std::endl;
 
-  std::cin >> entrada_opcoes;
+    std::cin >> opções_menu_principal;
 
 
-  
-  switch(entrada_opcoes){
-    case 1: 
-    std::cout << "Cadastrar Estudante: \n" 
-      << std::endl; 
-    Aluno::CadastroAluno();
 
-    case 2: 
-    std::cout << "Buscar Livro: \n" 
-    << std::endl;
-    //chama a função e interface de busca
+    switch (opções_menu_principal) {
+    case 1:
+        std::cout << "Cadastrar Estudante: \n"
+            << std::endl;
+        Aluno::CadastroAluno();
+        break;
 
+    case 2:
+        std::cout << "Buscar Livro: \n"
+            << std::endl;
+        AcervoBiblioteca::verAcervo(); //acho que é isso CONFERIR
+        break;
     case 3:
-    std::cout << "Ver Acervo: \n"
-    << std:: endl;
-    //chama a função e interface de busca
-
+        std::cout << "Ver Acervo: \n"
+            << std::endl;
+        //chama a função e interface de busca
+        break;
     case 4: //nao sei se vai existir
-   }
+        break;
+    case 5:
+        // sair do programa; 
+        break;
+     default:// colocar pra voltar no menu principal
+    }
+}
+
+void Sistema::menu_de_busca() {
+    int opções_pós_busca;
+    std::cout << "1. Alugar livro \n"
+        << std::endl;
+    std::cout << "2. Alterar dado do livro \n"
+        << std::endl;
+    std::cout << "3. Realizar outra busca \n"
+        << std::endl;
+    std::cout << "4. Voltar ao menu principal \n"
+        << std::endl;
+  
+    std::cin >> opções_pós_busca;
+
+  switch (opções_pós_busca){
+    case 1:
+
+}
