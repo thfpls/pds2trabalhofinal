@@ -77,5 +77,12 @@ void Sistema::menu_de_busca() {
 
   switch (opções_pós_busca){
     case 1:
+    std::cout << "Alugar livro: \n"
+        << std::endl;
+    GerenciarAluguel::alugarLivro()// Vai dar problema, pensar como vai colocar 
 
+    case 2:
+    std::cout << "Alterar dado do livro: \n"
+    << std::endl;
+    
 }
