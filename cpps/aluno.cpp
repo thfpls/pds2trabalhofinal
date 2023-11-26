@@ -1,5 +1,6 @@
 // aluno.cpp
 #include "aluno.hpp"
+#include "sistema.hpp"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -104,4 +105,5 @@ void Aluno::CadastroAluno() {
     else {
         std::cerr << "Erro ao salvar o aluno no arquivo CSV.\n";
     }
+    Sistema::menu_principal(); 
 }
