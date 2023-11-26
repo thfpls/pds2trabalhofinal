@@ -70,31 +70,28 @@ bool Administrador::admJaExiste() const {
 
 void Administrador::CadastrarAdm() {
     // Solicitar informações do usuário
-    std::string nome, email, matricula;
+    std::string nome, email;
 
-    std::cout << "Digite o nome do aluno: ";
+    std::cout << "Digite o nome do administrador: ";
     std::getline(std::cin, nome);
 
-    std::cout << "Digite o email do aluno: ";
+    std::cout << "Digite o email do administrador: ";
     std::getline(std::cin, email);
+    
+    // Criar um adm dinamicamente com base nas informações do usuário
+    Adiministrador novoAdm(nome, email, matricula);
 
-    std::cout << "Digite a matrícula do aluno: ";
-    std::getline(std::cin, matricula);
-
-    // Criar um aluno dinamicamente com base nas informações do usuário
-    Aluno novoAluno(nome, email, matricula);
-
-    // Verificar se o aluno já existe
-    if (novoAluno.alunoJaExiste()) {
-        std::cerr << "Aluno já existe no arquivo CSV.\n";
+    // Verificar se adm já existe
+    if (novoAdm.admJaExiste()) {
+        std::cerr << "Adm já existe no arquivo CSV.\n";
         return;
     }
 
     // Salvar as informações do aluno no arquivo CSV
-    if (novoAluno.salvar_aluno() == 0) {
-        std::cout << "Aluno salvo no arquivo CSV com sucesso.\n";
+    if (novoAdm.salvar_adm() == 0) {
+        std::cout << "Adm salvo no arquivo CSV com sucesso.\n";
     }
     else {
-        std::cerr << "Erro ao salvar o aluno no arquivo CSV.\n";
+        std::cerr << "Erro ao salvar o adm no arquivo CSV.\n";
     }
 }
