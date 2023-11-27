@@ -34,15 +34,13 @@ void Sistema::menu_principal() {
 
     std::cin >> opções_menu_principal;
 
-
-
     switch (opções_menu_principal) {
     case 1:
         std::cout << "Cadastrar Estudante: \n"
             << std::endl;
         Aluno::CadastroAluno();
+      //chamar menu principal
         break;
-
     case 2:
         std::cout << "Buscar Livro: \n"
             << std::endl;
