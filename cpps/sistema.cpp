@@ -27,7 +27,7 @@ void Sistema::menu_principal() {
         << std::endl;
     std::cout << "3. Ver Acervo \n"
         << std::endl;
-    std::cout << "4. Configuracoes \n"
+    std::cout << "4. Inserir Livro \n"
         << std::endl;
     std::cout << "5. Sair do programa \n"
         << std::endl;
@@ -37,21 +37,26 @@ void Sistema::menu_principal() {
     switch (opções_menu_principal) {
     case 1:
         std::cout << "Cadastrar Estudante: \n"
-            << std::endl;
+        << std::endl;
         Aluno::CadastroAluno();
-      //chamar menu principal
+        menu_principal(); 
         break;
     case 2:
         std::cout << "Buscar Livro: \n"
-            << std::endl;
-        AcervoBiblioteca::verAcervo(); //rever essa busca
+        << std::endl;
+        //rever essa busca
         break;
     case 3:
         std::cout << "Ver Acervo: \n"
-            << std::endl;
-        //chama a função e interface de busca
+        << std::endl;
+        AcervoBiblioteca::verAcervo(); 
+         menu_principal(); 
         break;
-    case 4: //nao sei se vai existir
+    case 4: 
+      std::cout << "Inseriri Livro: \n"
+        << std::endl;
+      
+      //nao sei se vai existir
         break;
     case 5:
         // sair do programa; 
