@@ -44,7 +44,8 @@ void Sistema::menu_principal() {
     case 2:
         std::cout << "Buscar Livro: \n"
         << std::endl;
-        //rever essa busca
+        AcervoBiblioteca::buscarLivro();
+        menu_de_busca();
         break;
     case 3:
         std::cout << "Ver Acervo: \n"
@@ -53,7 +54,7 @@ void Sistema::menu_principal() {
          menu_principal(); 
         break;
     case 4: 
-      std::cout << "Inseriri Livro: \n"
+      std::cout << "Inserir Livro: \n"
         << std::endl;
       
       //nao sei se vai existir
@@ -85,13 +86,19 @@ void Sistema::menu_de_busca() { //essa função vai estar após a busca de um li
     GerenciarAluguel::alugarLivro()// nao vai funcionar so colocar essa função aqui 
 
     case 2:
-    std::cout << "Alterar dado do livro: \n"
+    std::cout << "Alterar dados do livro: \n"
     << std::endl;
     Livro::alterarLivro(); //nao vai funcionar so colocar essa função aqui 
 
     case 3:
      std::cout << "Realizar outra busca: \n"
     << std::endl;
-    AcervoBiblioteca::verAcervo(); //rever essa busca
-    
+    AcervoBiblioteca::buscarLivro();
+    menu_de_busca();
+
+    case 4:
+    std::cout << "Voltar ao menu principal: \n"
+    << std::endl;
+    menu_principal();
+      
 }
