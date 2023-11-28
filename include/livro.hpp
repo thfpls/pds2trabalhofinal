@@ -22,7 +22,7 @@ private:
     std::string titulo;
     std::string autor;
     int anoPublicacao;
-    bool disponibilidade;
+    bool disponivel;
 };
 
 #endif // LIVRO_HPP
