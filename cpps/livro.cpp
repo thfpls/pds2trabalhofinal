@@ -16,7 +16,7 @@ int Livro::getAnoPublicacao() const {
 }
 
 bool Livro::estaAlugado() const {
-    return disponibilidade;
+    return disponivel;
 }
 
 
