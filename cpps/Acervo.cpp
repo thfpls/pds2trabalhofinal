@@ -2,7 +2,7 @@
 #include <iostream>
 #include <fstream>
 
-void Acervo::inserirLivro(const Livro& livro) {
+void Acervo::inserirLivro() {
     using namespace std;
 
     // Declarado o objeto pro arquivo
