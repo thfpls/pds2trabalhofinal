@@ -3,7 +3,47 @@
 #include <fstreram>
 
 void AcervoBiblioteca::inserirLivro(const Livro& livro) {
-    acervo.push_back(livro);
+    using namespace std;
+
+    // Declarado o objeto pro arquivo
+    ofstream arquivo;
+
+    // abre "acervo.csv" modo de output e append(botar novo no arquivo)
+    arquivo.open("acervo.csv", ios::out | ios::app);
+
+    // checa se abriu direitin
+    if (arquivo.is_open())
+    {
+        // declara variaveis pra estocar o input do user
+        string titulo, autor, anoPublicacao;
+
+        // Prompt o usuario a botar dados
+        cout << "Digite o titulo do livro: ";
+        getline(cin, titulo);
+        cout << "Digite o nome do autor do livro: ";
+        getline(cin, autor);
+        cout << "Digite o ano de publicacao do livro: ";
+        getline(cin, anoPublicacao);
+
+        // bota o livro no arquivo csv
+        arquivo << titulo << ", " << autor << ", " << anoPublicacao << ", " << "1" << "\n";
+
+        // fecha o arquivo
+        arquivo.close();
+
+        //bota o livro no runtime
+        Livro livro (titulo, autor, anoPublicacao);
+        acervo.push_back(livro);
+        // atesta o sucesso
+        cout << "Livro inserido no acervo com sucesso.\n";
+    }
+    else
+    {
+        // mostra erro
+        cout << "Erro: Não foi possível abrir o arquivo.\n";
+    }
+
+    return 0;
 }
 
 void AcervoBiblioteca::verAcervo() const {
