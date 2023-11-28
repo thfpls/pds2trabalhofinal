@@ -1,6 +1,6 @@
-#include "Acervo.hpp"
+#include "acervo.hpp"
 #include <iostream>
-#include <fstreram>
+#include <fstream>
 
 void AcervoBiblioteca::inserirLivro(const Livro& livro) {
     using namespace std;
