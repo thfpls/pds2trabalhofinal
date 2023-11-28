@@ -22,7 +22,7 @@ bool Livro::estaAlugado() const {
 #include "Acervo.hpp"
 #include <iostream>
 
-void AcervoBiblioteca::alterarLivro() {
+void Livro::alterarLivro() {
     using namespace std;
 
     // Declara variável para armazenar o título do livro a ser alterado
@@ -56,20 +56,5 @@ void AcervoBiblioteca::alterarLivro() {
         cout << "Livro alterado com sucesso." << endl;
     } else {
         cout << "Livro não encontrado no acervo." << endl;
-    }
-}
-
-
-void Livro::alugar() {
-/*    if (!alugado) {
-        alugado = true;
-        status = "ALUGADO";
-    }
-}
-
-void Livro::devolver() {
-    if (alugado) {
-        alugado = false;
-        status = "DISPONÍVEL"; */ //NADA VER ESSE TREM DE ALUGADO E STATUS, EH REDUNDANTE, ESSA FUNCAO EH P MUDAR A DISPONIBILIADE CASO ALUGADO
     }
 }
