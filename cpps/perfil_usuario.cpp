@@ -1,34 +1,28 @@
-#ifndef PERFIL_USUARIO_HPP
-#define PERFIL_USUARIO_HPP
-#include <iostream>
+#include "perfil_usuario.hpp"
+#include "aluno.hpp"
+//implementar o construtor
 
-class Aluno; 
-
-enum Papel_do_usuario
+Perfil_usuario::Perfil_usuario(const std::string& nome, const std::string& email) : _nome_perfil_usuario(nome), _email_perfil_usuario(email), _papel(ALUNO)
 {
-    ADMIN,
-    ALUNO
-};
+}
 
-class Perfil_usuario
-{
-private:
-    std::string _nome_perfil_usuario;
-    std::string _email_perfil_usuario;
+//métodos
+const std::string& Perfil_usuario::getNome_usuario() const {
+    return _nome_perfil_usuario;
+}
 
-protected:
-    Papel_do_usuario _papel;
+const std::string& Perfil_usuario::getEmail_usuario() const {
+    return _email_perfil_usuario;
+}
 
-public:
-    Perfil_usuario(const std::string& nome, const std::string& email);
-   
-    const std::string& getNome_usuario() const;
-    const std::string& getEmail_usuario() const;
+Papel_do_usuario Perfil_usuario::getPapel_usuario() const {
+    return _papel;
+}
 
-    Papel_do_usuario getPapel_usuario() const;
+std::string Perfil_usuario::papelToString() const {
+    return (_papel == ADMIN) ? "ADMIN" : "ALUNO";
+}
+// destrutor virtual
+Perfil_usuario::~Perfil_usuario() {
 
-    std::string papelToString() const; 
-
-    virtual ~Perfil_usuario();
-};
-#endif // PERFIL_USUARIO_HPP
+}
