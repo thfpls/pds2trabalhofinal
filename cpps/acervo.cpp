@@ -1,8 +1,8 @@
-#include "acervo.hpp"
+#include "Acervo.hpp"
 #include <iostream>
 #include <fstream>
 
-void AcervoBiblioteca::inserirLivro(const Livro& livro) {
+void Acervo::inserirLivro(const Livro& livro) {
     using namespace std;
 
     // Declarado o objeto pro arquivo
@@ -46,7 +46,7 @@ void AcervoBiblioteca::inserirLivro(const Livro& livro) {
     return 0;
 }
 
-void AcervoBiblioteca::verAcervo() const {
+void Acervo::verAcervo() const {
     if (acervo.empty()) {
         std::cout << "O acervo está vazio." << std::endl;
     } else {
@@ -59,7 +59,7 @@ void AcervoBiblioteca::verAcervo() const {
     }
 }
 
-void AcervoBiblioteca::buscarLivro() const {
+void Acervo::buscarLivro() const {
     using namespace std;
 
     // Declara variável para armazenar o título a ser buscado
