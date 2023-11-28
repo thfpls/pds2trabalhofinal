@@ -88,7 +88,7 @@ void Sistema::menu_de_busca() { //essa função vai estar após a busca de um li
     case 2:
     std::cout << "Alterar dados do livro: \n"
     << std::endl;
-    Livro::alterarLivro(); //nao vai funcionar so colocar essa função aqui 
+    Livro::alterarLivro(); 
 
     case 3:
      std::cout << "Realizar outra busca: \n"
