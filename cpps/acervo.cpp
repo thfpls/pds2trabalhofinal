@@ -1,5 +1,6 @@
 #include "Acervo.hpp"
 #include <iostream>
+#include <fstreram>
 
 void AcervoBiblioteca::inserirLivro(const Livro& livro) {
     acervo.push_back(livro);
