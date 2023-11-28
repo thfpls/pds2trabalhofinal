@@ -6,8 +6,8 @@
 
 class AcervoBiblioteca {
 public:
-    // Adiciona um livro ao acervo
-    void inserirLivro(const Livro& livro);
+    // Adiciona um livro ao acervo (para o csv e para o vetor no runtime)
+    void inserirLivro();
 
     // Lista todos os livros no acervo
     void verAcervo() const;
