@@ -1,5 +1,5 @@
-#include "Aluguel.hpp"
-#include "Livro.hpp"
+#include "aluguel.hpp"
+#include "livro.hpp"
 
 void Aluguel::checarDisponibilidade(const std::string& titulo) {
     for (auto& livro : livros) {
