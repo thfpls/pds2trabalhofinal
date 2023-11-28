@@ -1,4 +1,4 @@
-#include "gerenciarUsuário.hpp"
+#include "gerenciarUsuario.hpp"
 
 void gerenciarUsuario::deletarPerfil (std::string _email){
     
@@ -111,4 +111,3 @@ void gerenciarUsuario::imprimirPerfis (){
     }
     arquivo_usuarios.close();
 }
-
