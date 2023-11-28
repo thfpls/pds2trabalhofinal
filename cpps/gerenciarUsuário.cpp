@@ -44,10 +44,57 @@ void gerenciarUsuario::deletarPerfil (std::string _email){
 
 void gerenciarUsuario::alterarPerfil (std::string _email, std::string _nome, std::string _livrosAlugados){
     std::ifstream arquivo_usuarios("files/usuarios.csv");
-    email=_email;
-    nome=_nome;
-    livrosAlugados=_livrosAlugados;
+    std::ofstream arquivo_usuariost("temporario.csv");  // Arquivo temporário para armazenar as alterações
+
+    if (!arquivo_usuarios.is_open() || !arquivo_usuariost.is_open()) {
+        std::cout << "Erro ao abrir o arquivo." << std::endl;
+        return;
+    }
+
+    std::string linha;
+    std::vector<std::string> linhasAlteradas;
+
+    while (getline(arquivo_usuarios, linha)) {
+        std::istringstream streamLinha(linha);
+        std::string valor;
+
+        std::vector<std::string> valoresLinha;
+        while (getline(streamLinha, valor, ',')) {
+            valoresLinha.push_back(valor);
+        }
+
+        // Suponha que o nome está na primeira coluna
+        if (valoresLinha.size() > 0 && valoresLinha[0] == nome) {
+            // Altera os dados do perfil
+            valoresLinha[1] = novoPerfil.nome;
+            valoresLinha[2] = novoPerfil.sobrenome;
+            // Adicione mais linhas para outros campos conforme necessário
+
+            // Atualiza a linha com os novos valores
+            std::ostringstream linhaAtualizada;
+            for (const auto& v : valoresLinha) {
+                linhaAtualizada << std::quoted(v) << ",";
+            }
+
+            linhasAlteradas.push_back(linhaAtualizada.str());
+        } else {
+            linhasAlteradas.push_back(linha);
+        }
+    }
+
+    arquivoEntrada.close();
+
+    // Escreve as linhas alteradas no arquivo temporário
+    for (const auto& linha : linhasAlteradas) {
+        arquivoSaida << linha << std::endl;
+    }
+
+    arquivoSaida.close();
+
+    // Renomeia o arquivo temporário para substituir o original
+    std::rename("temporario.csv", nomeArquivo.c_str());
 }
+
 
 void gerenciarUsuario::imprimirPerfis (){
     std::ifstream arquivo_usuarios("files/usuarios.csv");
