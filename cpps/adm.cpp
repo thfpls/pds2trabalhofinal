@@ -1,4 +1,3 @@
-// adm.cpp
 #include "adm.hpp"
 #include <iostream>
 #include <fstream>
@@ -95,3 +94,7 @@ void Administrador::CadastrarAdm() {
         std::cerr << "Erro ao salvar o adm no arquivo CSV.\n";
     }
 }
+
+
+
+
