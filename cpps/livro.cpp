@@ -16,12 +16,10 @@ int Livro::getAnoPublicacao() const {
 }
 
 bool Livro::estaAlugado() const {
-    return alugado;
+    return disponibilidade;
 }
 
-std::string Livro::getStatus() const {
-    return status;
-}
+
 
 void Livro::alterarLivro(const std::string& novoTitulo, const std::string& novoAutor, int novoAnoPublicacao) {
     titulo = novoTitulo;
@@ -30,7 +28,7 @@ void Livro::alterarLivro(const std::string& novoTitulo, const std::string& novoA
 }
 
 void Livro::alugar() {
-    if (!alugado) {
+/*    if (!alugado) {
         alugado = true;
         status = "ALUGADO";
     }
@@ -39,6 +37,6 @@ void Livro::alugar() {
 void Livro::devolver() {
     if (alugado) {
         alugado = false;
-        status = "DISPONÍVEL";
+        status = "DISPONÍVEL"; */ //NADA VER ESSE TREM DE ALUGADO E STATUS, EH REDUNDANTE
     }
 }
