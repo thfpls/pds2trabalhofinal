@@ -69,7 +69,7 @@ void Sistema::menu_de_busca() { //essa função vai estar após a busca de um li
     int opções_pós_busca;
     std::cout << "1. Alugar livro \n"
         << std::endl;
-    std::cout << "2. Alterar dado do livro \n"
+    std::cout << "2. Alterar dados do livro \n"
         << std::endl;
     std::cout << "3. Realizar outra busca \n"
         << std::endl;
