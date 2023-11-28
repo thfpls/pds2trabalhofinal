@@ -58,3 +58,31 @@ void AcervoBiblioteca::verAcervo() const {
         }
     }
 }
+
+void AcervoBiblioteca::buscarLivro() const {
+    using namespace std;
+
+    // Declara variável para armazenar o título a ser buscado
+    string titulo;
+    cout << "Digite o título do livro a ser buscado: ";
+    getline(cin, titulo);
+
+    // Realiza a busca no acervo pelo título
+    bool encontrado = false;
+    for (const auto& livro : acervo) {
+        if (livro.getTitulo() == titulo) {
+            // Exibe as informações do livro encontrado
+            cout << "Livro encontrado no acervo:" << endl;
+            cout << "Título: " << livro.getTitulo() << ", Autor: " << livro.getAutor()
+                 << ", Ano: " << livro.getAnoPublicacao() << ", Estado: "
+                 << (livro.estaAlugado() ? "Alugado" : "Disponível") << endl;
+
+            encontrado = true;
+            break; // Para a busca após encontrar o primeiro livro com o título correspondente
+        }
+    }
+
+    if (!encontrado) {
+        cout << "Livro não encontrado no acervo." << endl;
+    }
+}
