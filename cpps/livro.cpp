@@ -37,6 +37,6 @@ void Livro::alugar() {
 void Livro::devolver() {
     if (alugado) {
         alugado = false;
-        status = "DISPONÍVEL"; */ //NADA VER ESSE TREM DE ALUGADO E STATUS, EH REDUNDANTE
+        status = "DISPONÍVEL"; */ //NADA VER ESSE TREM DE ALUGADO E STATUS, EH REDUNDANTE, ESSA FUNCAO EH P MUDAR A DISPONIBILIADE CASO ALUGADO
     }
 }
