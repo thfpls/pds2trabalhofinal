@@ -9,7 +9,8 @@
 
 class GerenciarAluguel {
 public:
-    static std::vector<Livro> livros;  // Alteração: Usaremos um vetor de Livro em vez de um mapa
+    static std::vector<Livro> livros; 
+    //funções para alugar, devolver o livro, aumentar prazo e definir multa, conferir disponibilidade
 
     static void alugarLivro(const std::string& titulo);
     static void devolverLivro(const std::string& titulo);
