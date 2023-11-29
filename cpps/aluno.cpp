@@ -6,7 +6,7 @@
 #include <cctype>
 
 Aluno::Aluno(const std::string& nome, const std::string& email, const std::string& matricula)
-    : Perfil_usuario(nome, email), _matricula(matricula)
+    : PerfilUsuario(nome, email), _matricula(matricula)
 {
     _papel = ALUNO;
 }
@@ -16,7 +16,7 @@ const std::string& Aluno::getMatricula() const {
 }
 
 
-int Aluno::salvar_aluno() const {
+int Aluno::salvarAluno() const {
     // Abre o arquivo CSV para escrita (modo append)
     std::ofstream arquivo("usuario.csv", std::ios::out | std::ios::app);
 
@@ -27,7 +27,7 @@ int Aluno::salvar_aluno() const {
     }
 
     // Escreve as informações do aluno no arquivo CSV
-    arquivo << "ALUNO," << getNome_usuario() << "," << getEmail_usuario() << "," << getMatricula() << "\n";
+    arquivo << "ALUNO," << getNomeUsuario() << "," << getEmailUsuario() << "," << getMatricula() << "\n";
 
     // Fecha o arquivo automaticamente ao sair do escopo
     // devido à utilização do objeto std::ofstream
@@ -59,7 +59,7 @@ bool Aluno::alunoJaExiste() const {
         std::getline(iss, matriculaArquivo, ',');
 
         // Comparação com os parâmetros fornecidos
-        if (papel == "ALUNO" && getNome_usuario() == nomeArquivo && getEmail_usuario() == emailArquivo && getMatricula() == matriculaArquivo) {
+        if (papel == "ALUNO" && getNomeUsuario() == nomeArquivo && getEmailUsuario() == emailArquivo && getMatricula() == matriculaArquivo) {
             // Aluno encontrado, feche o arquivo e retorne true
             arquivo.close();
             return true;
@@ -132,7 +132,7 @@ void Aluno::CadastroAluno() {
     }
 
     // Salvar as informações do aluno no arquivo CSV
-    if (novoAluno.salvar_aluno() == 0) {
+    if (novoAluno.salvarAluno() == 0) {
         std::cout << "Aluno salvo no arquivo CSV com sucesso.\n";
     }
     else {
