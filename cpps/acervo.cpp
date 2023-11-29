@@ -151,3 +151,12 @@ void AcervoBiblioteca::buscarLivro() const {
         cout << "Livro não encontrado no acervo." << endl;
     }
 }
+
+void AcervoBiblioteca::botarNoVetor(string titulo, string autor, int anoPublicacao) {
+    // Cria um objeto da classe Livro com os parâmetros
+    Livro livro(titulo, autor, anoPublicacao);
+    // Insere o objeto no final do vetor
+    acervo.push_back(livro);
+    // Imprime uma mensagem de confirmação
+    cout << "Livro inserido no acervo com sucesso.\n";
+};
