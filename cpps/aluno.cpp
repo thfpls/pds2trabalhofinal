@@ -73,7 +73,7 @@ bool Aluno::alunoJaExiste() const {
     return false;
 }
 
-void Aluno::CadastroAluno() {
+void Aluno::cadastroAluno() {
     // Solicitar informações do usuário
     std::string nome, email, matricula;
 
