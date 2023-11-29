@@ -3,13 +3,13 @@
 #include <fstream>
 
 Administrador::Administrador(const std::string& nome, const std::string& email)
-    : Perfil_usuario(nome, email)
+    : PerfilUsuario(nome, email)
 {
     // Altera o papel para ADMIN ao criar um Administrador
     _papel = ADMIN;
 }
 
-int Administrador::salvar_adm()
+int Administrador::salvarAdm()
 {
     // Cria um objeto ofstream e o associa ao arquivo "usuario.csv"
     std::ofstream arquivo("usuario.csv", std::ios::out | std::ios::app);
@@ -53,7 +53,7 @@ bool Administrador::admJaExiste() const {
         std::getline(iss, emailArquivo, ',');
 
         // Comparação com os parâmetros fornecidos
-        if (papel == "ADMIN" && getNome_usuario() == nomeArquivo && getEmail_usuario() == emailArquivo) {
+        if (papel == "ADMIN" && getNomeUsuario() == nomeArquivo && getEmailUsuario() == emailArquivo) {
             // Adm encontrado, feche o arquivo e retorne true
             arquivo.close();
             return true;
@@ -67,7 +67,7 @@ bool Administrador::admJaExiste() const {
     return false;
 }
 
-void Administrador::CadastroAdm() {
+void Administrador::cadastroAdm() {
     // Solicitar informações do usuário
     std::string nome, email;
 
@@ -109,7 +109,7 @@ void Administrador::CadastroAdm() {
     }
 
     // Salvar as informações do aluno no arquivo CSV
-    if (novoAdm.salvar_adm() == 0) {
+    if (novoAdm.salvarAdm() == 0) {
         std::cout << "Aluno salvo no arquivo CSV com sucesso.\n";
     }
     else {
