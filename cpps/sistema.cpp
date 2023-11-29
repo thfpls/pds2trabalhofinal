@@ -11,7 +11,7 @@ std::cout << "Ola! Bem vindo, Administrador \n"
   std::cout << "Se identifique:" // nao sei se isso é a melhor coisa, é pq na foto do theo tem cadastrar adm ou usuario primeiro 
   << std:: endl;
 
-  Administrador::criarEsalvarNovoAdm();// vou ter q adaptar pra caso ja tenha cadastro 
+  Administrador::CadastroAdm();// vou ter q adaptar pra caso ja tenha cadastro 
 
   std::cout << "O que deseja fazer?"
   << std:: endl;
