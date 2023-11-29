@@ -12,6 +12,9 @@ public:
     // Lista todos os livros no acervo
     void verAcervo() const;
 
+    // Carrega o acervo pro vector na classe sistema
+    void carregarAcervo();
+
 private:
     std::vector<Livro> acervo;
 };
