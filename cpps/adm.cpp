@@ -22,7 +22,7 @@ int Administrador::salvar_adm()
     }
 
     // Escreve as informações do administrador no arquivo CSV
-    arquivo << "ADMIN," << getNome_usuario()<< "," << getEmail_usuario() << "\n";
+    arquivo << "ADMIN," << getNome_usuario() << "," << getEmail_usuario() << "\n";
 
     // Fecha o arquivo automaticamente ao sair do escopo
     // devido à utilização do objeto std::ofstream
@@ -67,34 +67,53 @@ bool Administrador::admJaExiste() const {
     return false;
 }
 
-void Administrador::CadastrarAdm() {
+void Administrador::CadastroAdm() {
     // Solicitar informações do usuário
     std::string nome, email;
 
-    std::cout << "Digite o nome do administrador: ";
-    std::getline(std::cin, nome);
+    // Verificar o nome (permitir letras e espaços)
+    while (true) {
+        std::cout << "Digite o nome do administrador: ";
+        std::getline(std::cin, nome);
 
+        bool nomeValido = true;
+        for (char c : nome) {
+            if (!std::isalpha(c) && !std::isspace(c)) {
+                nomeValido = false;
+                break;
+            }
+        }
+
+        if (nomeValido) {
+            break;
+        }
+
+        std::cout << "Nome inválido. Use apenas letras e espaços. Tente novamente.\n";
+    }
+
+    // Verificar a matrícula (permitir apenas números)
+
+
+    // Solicitar o email do aluno
     std::cout << "Digite o email do administrador: ";
     std::getline(std::cin, email);
-    
-    // Criar um adm dinamicamente com base nas informações do usuário
-    Adiministrador novoAdm(nome, email, matricula);
 
-    // Verificar se adm já existe
+    // Criar um aluno dinamicamente com base nas informações do usuário
+    Administrador novoAdm(nome, email);
+
+
+    // Verificar se o aluno já existe
     if (novoAdm.admJaExiste()) {
-        std::cerr << "Adm já existe no arquivo CSV.\n";
+        std::cerr << "Aluno já existe no arquivo CSV.\n";
         return;
     }
 
     // Salvar as informações do aluno no arquivo CSV
     if (novoAdm.salvar_adm() == 0) {
-        std::cout << "Adm salvo no arquivo CSV com sucesso.\n";
+        std::cout << "Aluno salvo no arquivo CSV com sucesso.\n";
     }
     else {
-        std::cerr << "Erro ao salvar o adm no arquivo CSV.\n";
+        std::cerr << "Erro ao salvar o aluno no arquivo CSV.\n";
     }
+
 }
-
-
-
-
