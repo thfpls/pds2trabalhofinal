@@ -2,11 +2,11 @@
 #ifndef ADMINISTRADOR_HPP
 #define ADMINISTRADOR_HPP
 
-#include "perfil_usuario.hpp"
+#include "perfilUsuario.hpp"
 #include <iostream>
 #include <string>
 
-class Administrador : public Perfil_usuario
+class Administrador : public PerfilUsuario
 {
 private:
     std::string _nome_adm;
@@ -15,10 +15,10 @@ private:
 public:
     Administrador(const std::string& nome, const std::string& email);
 
-    int salvar_adm();
+    int salvarAdm();
     bool admJaExiste() const;
 
-    static void CadastroAdm();
+    static void cadastroAdm();
 };
 
 #endif // ADMINISTRADOR_HPP
