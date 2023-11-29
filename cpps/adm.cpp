@@ -22,7 +22,7 @@ int Administrador::salvarAdm()
     }
 
     // Escreve as informações do administrador no arquivo CSV
-    arquivo << "ADMIN," << getNome_usuario() << "," << getEmail_usuario() << "\n";
+    arquivo << "ADMIN," << getNomeUsuario() << "," << getEmailUsuario() << "\n";
 
     // Fecha o arquivo automaticamente ao sair do escopo
     // devido à utilização do objeto std::ofstream
@@ -90,9 +90,6 @@ void Administrador::cadastroAdm() {
 
         std::cout << "Nome inválido. Use apenas letras e espaços. Tente novamente.\n";
     }
-
-    // Verificar a matrícula (permitir apenas números)
-
 
     // Solicitar o email do aluno
     std::cout << "Digite o email do administrador: ";
