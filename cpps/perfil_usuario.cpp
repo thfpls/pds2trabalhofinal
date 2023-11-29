@@ -7,15 +7,15 @@ Perfil_usuario::Perfil_usuario(const std::string& nome, const std::string& email
 }
 
 //métodos
-const std::string& Perfil_usuario::getNome_usuario() const {
+const std::string& Perfil_usuario::getNomeUsuario() const {
     return _nome_perfil_usuario;
 }
 
-const std::string& Perfil_usuario::getEmail_usuario() const {
+const std::string& Perfil_usuario::getEmailUsuario() const {
     return _email_perfil_usuario;
 }
 
-Papel_do_usuario Perfil_usuario::getPapel_usuario() const {
+Papel_do_usuario Perfil_usuario::getPapelUsuario() const {
     return _papel;
 }
 
