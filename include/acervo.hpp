@@ -13,7 +13,7 @@ public:
     void verAcervo() const;
 
     // Carrega o acervo pro vector na classe sistema
-    void carregarAcervo();
+    void botarNoVetor();
 
 private:
     std::vector<Livro> acervo;
