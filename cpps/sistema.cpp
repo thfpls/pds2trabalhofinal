@@ -1,10 +1,16 @@
 #include "sistema.hpp"
+#include <vector>
+#include <sstream>
+#include <string>
 
 Sistema::Sistema(){
   
 }
 
 void Sistema::inicia_sistema(){
+  
+carregarVetor();
+  
 std::cout << "Ola! Bem vindo, Administrador \n"
 << std:: endl;
 
@@ -17,6 +23,54 @@ std::cout << "Ola! Bem vindo, Administrador \n"
   << std:: endl;
 
   menu_principal(); 
+}
+
+void Sistema::carregarVetor() {
+        ifstream arquivo_in;
+        arquivo_in.open("acervo.csv", ios::in);
+
+        // checa se abriu direitin
+        if (arquivo_in.is_open()) {
+        // declara um vetor pra armazenar as linhas do arquivo
+        vector<string> linhas;
+
+        // declara uma string pra armazenar uma linha do arquivo
+        string linha;
+
+        // le o arquivo e armazena as linhas no vetor
+        while (getline(arquivo_in, linha, '\n'))
+        {
+            linhas.push_back(linha);
+        }
+
+        // fecha o arquivo de input
+        arquivo_in.close();
+
+        // percorre o vetor de linhas
+        for (int i = 0; i < linhas.size(); i++)
+        {
+            // declara um stringstream pra separar os campos do livro
+            stringstream ss(linhas[i]);
+
+            // declara um vetor pra armazenar os campos do livro
+            vector<string> campos;
+
+            // declara uma string pra armazenar um campo do livro
+            string campo;
+
+            // le o stringstream e armazena os campos no vetor
+            while (getline(ss, campo, ','))
+            {
+                campos.push_back(campo);
+            }
+            botarNoVetor(campos[0], campos[1], stoi(campos[2]));
+        }
+        }
+        else
+    {
+        // mostra erro
+        cout << "Erro: Não foi possível abrir o arquivo.\n";
+    }
 }
 
 void Sistema::menu_principal() {
