@@ -1,4 +1,4 @@
-std::vector<Livro> GerenciarAluguel::livros;
+#include "gerenciarAluguel.hpp"
 #include <iostream>
 
 std::vector<Livro> GerenciarAluguel::livros;
