@@ -15,7 +15,7 @@ const std::string& PerfilUsuario::getEmailUsuario() const {
     return _email_perfil_usuario;
 }
 
-Papel_do_usuario Perfil_usuario::getPapelUsuario() const {
+PapelDoUsuario PerfilUsuario::getPapelUsuario() const {
     return _papel;
 }
 
