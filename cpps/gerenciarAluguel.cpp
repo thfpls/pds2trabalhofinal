@@ -1,46 +1,30 @@
+
 #include "gerenciarAluguel.hpp"
 
-std::map<std::pair<std::string, std::string>, std::pair<int, double>> GerenciarAluguel::livrosAlugados;
+std::vector<Livro> GerenciarAluguel::livros;
 
-void GerenciarAluguel::alugarLivro(const std::string& titulo, const std::string& disponibilidade) {
-    std::pair<std::string, std::string> chaveLivro = std::make_pair(titulo, disponibilidade);
-    livrosAlugados[chaveLivro] = std::make_pair(7, 0.0);
+void GerenciarAluguel::aumentarPrazo(const std::string& titulo, int dias) {
+    auto it = std::find_if(livros.begin(), livros.end(), [titulo](const Livro& livro) {
+        return livro.getTitulo() == titulo && livro.estaAlugado();
+    });
 
-    std::cout << "Livro '" << titulo << "' alugado com sucesso." << std::endl;
-}
-
-void GerenciarAluguel::devolverLivro(const std::string& titulo, const std::string& disponibilidade) {
-    std::pair<std::string, std::string> chaveLivro = std::make_pair(titulo, disponibilidade);
-
-    auto it = livrosAlugados.find(chaveLivro);
-    if (it != livrosAlugados.end()) {
-        livrosAlugados.erase(it);
-        std::cout << "Livro '" << titulo << "' devolvido com sucesso." << std::endl;
+    if (it != livros.end()) {
+        it->aumentarPrazo(dias);
+        std::cout << "Prazo de devolução do livro '" << titulo << "' aumentado para " << it->getPrazoDevolucao() << " dias." << std::endl;
     } else {
-        std::cout << "Livro '" << titulo << "' não encontrado no sistema de aluguel." << std::endl;
+        std::cout << "Livro '" << titulo << "' não encontrado ou não está alugado." << std::endl;
     }
 }
 
-void GerenciarAluguel::aumentarPrazo(const std::string& titulo, const std::string& disponibilidade, int dias) {
-    std::pair<std::string, std::string> chaveLivro = std::make_pair(titulo, disponibilidade);
+void GerenciarAluguel::definirMulta(const std::string& titulo, double multa) {
+    auto it = std::find_if(livros.begin(), livros.end(), [titulo](const Livro& livro) {
+        return livro.getTitulo() == titulo && livro.estaAlugado();
+    });
 
-    auto it = livrosAlugados.find(chaveLivro);
-    if (it != livrosAlugados.end()) {
-        it->second.first += dias;
-        std::cout << "Prazo de devolução do livro '" << titulo << "' aumentado para " << it->second.first << " dias." << std::endl;
-    } else {
-        std::cout << "Livro '" << titulo << "' não encontrado no sistema de aluguel." << std::endl;
-    }
-}
-
-void GerenciarAluguel::definirMulta(const std::string& titulo, const std::string& disponibilidade, double multa) {
-    std::pair<std::string, std::string> chaveLivro = std::make_pair(titulo, disponibilidade);
-
-    auto it = livrosAlugados.find(chaveLivro);
-    if (it != livrosAlugados.end()) {
-        it->second.second = multa;
+    if (it != livros.end()) {
+        it->definirMulta(multa);
         std::cout << "Multa para o livro '" << titulo << "' definida como " << multa << "." << std::endl;
     } else {
-        std::cout << "Livro '" << titulo << "' não encontrado no sistema de aluguel." << std::endl;
+        std::cout << "Livro '" << titulo << "' não encontrado ou não está alugado." << std::endl;
     }
 }
