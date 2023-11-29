@@ -23,10 +23,10 @@ protected:
 public:
     Perfil_usuario(const std::string& nome, const std::string& email);
    
-    const std::string& getNome_usuario() const;
-    const std::string& getEmail_usuario() const;
+    const std::string& getNomeUsuario() const;
+    const std::string& getEmailUsuario() const;
 
-    Papel_do_usuario getPapel_usuario() const;
+    Papel_do_usuario getPapelUsuario() const;
 
     std::string papelToString() const; 
 
