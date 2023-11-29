@@ -2,11 +2,11 @@
 #ifndef ALUNO_HPP
 #define ALUNO_HPP
 
-#include "perfil_usuario.hpp"
+#include "perfilUsuario.hpp"
 #include <vector>
 #include <string>
 
-class Aluno : public Perfil_usuario {
+class Aluno : public PerfilUsuario {
 private:
     std::string _matricula;
     std::vector<std::string> _livros_emprestados;
@@ -17,10 +17,10 @@ public:
     const std::string& getMatricula() const;
     const std::vector<std::string>& getLivrosEmprestados() const;
 
-    int salvar_aluno() const;
+    int salvarAluno() const;
     bool alunoJaExiste() const;
 
-    static void CadastroAluno();
+    static void cadastroAluno();
 };
 
 #endif // ALUNO_HPP
