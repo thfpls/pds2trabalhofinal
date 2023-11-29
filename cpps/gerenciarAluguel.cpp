@@ -1,11 +1,7 @@
-
-#include "gerenciarAluguel.hpp"
+std::vector<Livro> GerenciarAluguel::livros;
+#include <iostream>
 
 std::vector<Livro> GerenciarAluguel::livros;
-
-// gerenciarAluguel.cpp
-#include "gerenciarAluguel.hpp"
-#include <iostream>
 
 void GerenciarAluguel::alugarLivro(const std::string& titulo, const std::string& usuario) {
     livrosAlugados[usuario].insert(titulo);
