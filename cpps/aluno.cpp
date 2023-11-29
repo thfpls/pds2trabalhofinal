@@ -1,8 +1,9 @@
+// aluno.cpp
 #include "aluno.hpp"
-#include "sistema.hpp"
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <cctype>
 
 Aluno::Aluno(const std::string& nome, const std::string& email, const std::string& matricula)
     : Perfil_usuario(nome, email), _matricula(matricula)
@@ -14,9 +15,6 @@ const std::string& Aluno::getMatricula() const {
     return _matricula;
 }
 
-const std::vector<std::string>& Aluno::getLivrosEmprestados() const {
-    return _livros_emprestados;
-}
 
 int Aluno::salvar_aluno() const {
     // Abre o arquivo CSV para escrita (modo append)
@@ -79,17 +77,53 @@ void Aluno::CadastroAluno() {
     // Solicitar informações do usuário
     std::string nome, email, matricula;
 
-    std::cout << "Digite o nome do aluno: ";
-    std::getline(std::cin, nome);
+    // Verificar o nome (permitir letras e espaços)
+    while (true) {
+        std::cout << "Digite o nome do aluno: ";
+        std::getline(std::cin, nome);
 
+        bool nomeValido = true;
+        for (char c : nome) {
+            if (!std::isalpha(c) && !std::isspace(c)) {
+                nomeValido = false;
+                break;
+            }
+        }
+
+        if (nomeValido) {
+            break;
+        }
+
+        std::cout << "Nome inválido. Use apenas letras e espaços. Tente novamente.\n";
+    }
+
+    // Verificar a matrícula (permitir apenas números)
+    while (true) {
+        std::cout << "Digite a matrícula do aluno (apenas números): ";
+        std::getline(std::cin, matricula);
+
+        bool matriculaValida = true;
+        for (char c : matricula) {
+            if (!std::isdigit(c)) {
+                matriculaValida = false;
+                break;
+            }
+        }
+
+        if (matriculaValida) {
+            break;
+        }
+
+        std::cout << "Matrícula inválida. Tente novamente.\n";
+    }
+
+    // Solicitar o email do aluno
     std::cout << "Digite o email do aluno: ";
     std::getline(std::cin, email);
 
-    std::cout << "Digite a matrícula do aluno: ";
-    std::getline(std::cin, matricula);
-
     // Criar um aluno dinamicamente com base nas informações do usuário
     Aluno novoAluno(nome, email, matricula);
+
 
     // Verificar se o aluno já existe
     if (novoAluno.alunoJaExiste()) {
@@ -104,11 +138,5 @@ void Aluno::CadastroAluno() {
     else {
         std::cerr << "Erro ao salvar o aluno no arquivo CSV.\n";
     }
-    Sistema::menu_principal(); 
+
 }
-
-
-
-  
-
-
