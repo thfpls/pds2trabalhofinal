@@ -1,4 +1,5 @@
 #include "gerenciarAluguel.hpp"
+#include "aluguel.cpp"
 #include <iostream>
 #include <algorithm>
 
