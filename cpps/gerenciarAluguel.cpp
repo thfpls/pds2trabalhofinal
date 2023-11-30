@@ -64,15 +64,3 @@ void GerenciarAluguel::definirMulta(const std::string& titulo, double multa) {
     }
 }
 
-bool GerenciarAluguel::checarDisponibilidade(const std::string& titulo) {
-    auto it = std::find_if(livros.begin(), livros.end(), [titulo](const Livro& livro) {
-        return livro.getTitulo() == titulo;
-    });
-
-    if (it != livros.end()) {
-        return !it->estaAlugado();
-    } else {
-        std::cout << "Livro não encontrado." << std::endl;
-        return false;
-    }
-}
