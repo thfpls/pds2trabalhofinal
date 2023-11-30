@@ -17,6 +17,8 @@ public:
     static void aumentarPrazo(const std::string& titulo, int dias);
     static void definirMulta(const std::string& titulo, double multa);
     static bool checarDisponibilidade(const std::string& titulo);
+    void alugar();
+    void devolver();
 };
 
 #endif // GERENCIAR_ALUGUEL_HPP
