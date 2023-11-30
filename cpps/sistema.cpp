@@ -17,7 +17,7 @@ std::cout << "Ola! Bem vindo, Administrador \n"
   std::cout << "Se identifique:" // nao sei se isso é a melhor coisa, é pq na foto do theo tem cadastrar adm ou usuario primeiro 
   << std:: endl;
 
-  Administrador::CadastroAdm();// vou ter q adaptar pra caso ja tenha cadastro 
+  Administrador::cadastroAdm();// vou ter q adaptar pra caso ja tenha cadastro 
 
   std::cout << "O que deseja fazer?"
   << std:: endl;
@@ -92,7 +92,7 @@ void Sistema::menu_principal() {
     case 1:
         std::cout << "Cadastrar Estudante: \n"
         << std::endl;
-        Aluno::CadastroAluno();
+        Aluno::cadastroAluno();
         menu_principal(); 
         break;
     case 2:
