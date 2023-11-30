@@ -6,14 +6,13 @@
 #include <iostream>
 #include <string>
 
-/**
- * @brief Classe que representa um Administrador, derivada da classe PerfilUsuario.
- */
+
+ ///@brief Classe que representa um Administrador, derivada da classe PerfilUsuario.
 class Administrador : public PerfilUsuario
 {
 private:
-    std::string _nome_adm; /**< Nome do Administrador. */
-    std::string _email_adm; /**< E-mail do Administrador. */
+    std::string _nome_adm; 
+    std::string _email_adm; 
 
 public:
     
