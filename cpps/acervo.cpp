@@ -16,7 +16,8 @@ void AcervoBiblioteca::inserirLivro() {
     if (arquivo_in.is_open())
     {
         // declara variaveis pra estocar o input do user
-        string titulo, autor, anoPublicacao;
+        string titulo, autor;
+        int anoPublicacao;
         
         // Prompt o usuario a botar dados
         cout << "Digite o titulo do livro: ";
