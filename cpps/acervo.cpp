@@ -25,7 +25,7 @@ void AcervoBiblioteca::inserirLivro() {
         cout << "Digite o nome do autor do livro: ";
         getline(cin, autor);
         cout << "Digite o ano de publicacao do livro: ";
-        getline(cin, anoPublicacao);
+        cin >> anoPublicacao;
         
            // declara um vetor pra armazenar as linhas do arquivo
         vector<string> linhas;
@@ -117,7 +117,7 @@ void AcervoBiblioteca::verAcervo() const {
         std::cout << "O acervo está vazio." << std::endl;
     } else {
         std::cout << "Acervo da Biblioteca:" << std::endl;
-        for (const auto& livro : acervo) {
+        for (const auto& livro : this->acervo) {
             std::cout << "Título: " << livro.getTitulo() << ", Autor: " << livro.getAutor()
                       << ", Ano: " << livro.getAnoPublicacao() << ", Estado: "
                       << (livro.estaAlugado() ? "Alugado" : "Disponível") << std::endl;
@@ -135,7 +135,7 @@ void AcervoBiblioteca::buscarLivro() const {
 
     // Realiza a busca no acervo pelo título
     bool encontrado = false;
-    for (const auto& livro : acervo) {
+    for (const auto& livro : this->const std::string& email, const std::string& novoNome, const std::string& novosLivrosAlugadosacervo) {
         if (livro.getTitulo() == titulo) {
             // Exibe as informações do livro encontrado
             cout << "Livro encontrado no acervo:" << endl;
