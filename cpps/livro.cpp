@@ -1,4 +1,6 @@
 #include "livro.hpp"
+#include "acervo.hpp"
+#include <iostream>
 
 Livro::Livro(const std::string& titulo, const std::string& autor, int anoPublicacao)
     : titulo(titulo), autor(autor), anoPublicacao(anoPublicacao), disponivel(true) {}
@@ -19,8 +21,7 @@ bool Livro::estaAlugado() const {
     return disponivel;
 }
 
-#include "Acervo.hpp"
-#include <iostream>
+
 
 void Livro::alterarLivro() {
     using namespace std;
