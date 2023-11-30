@@ -4,6 +4,14 @@
 
 std::vector<Livro> GerenciarAluguel::livros;
 
+void GerenciarAluguel::alugar() {
+    disponivel = false;
+}
+
+void GerenciarAluguel::devolver() {
+    disponivel = true;
+}
+
 void GerenciarAluguel::alugarLivro(const std::string& titulo) {
     auto it = std::find_if(livros.begin(), livros.end(), [titulo](const Livro& livro) {
         return livro.getTitulo() == titulo;
