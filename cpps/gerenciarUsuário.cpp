@@ -42,7 +42,7 @@ void gerenciarUsuario::deletarPerfil (std::string _email){
     }
 }
 
-void alterarPerfil(const std::string& arquivoCSV, const std::string& email, const std::string& novoNome, const std::string& novosLivrosAlugados) {
+void alterarPerfil(const std::string& email, const std::string& novoNome, const std::string& novosLivrosAlugados) {
     // Abrir o arquivo CSV
     std::ifstream arquivo_usuarios("files/usuarios.csv");
     if (!arquivo.is_open()) {
@@ -82,15 +82,15 @@ void alterarPerfil(const std::string& arquivoCSV, const std::string& email, cons
     }
 
     // Abrir o arquivo novamente para escrita
-    std::ofstream arquivoSaida(arquivoCSV);
+    std::ofstream arquivo_atualizado("files/usuarios_temp.csv");
 
     // Escrever os dados atualizados no arquivo
     for (const Usuario& usuario : usuarios) {
-        arquivoSaida << usuario.email << ',' << usuario.nome << ',' << usuario.livrosAlugados << '\n';
+        arquivo_atualizado << usuario.email << ',' << usuario.nome << ',' << usuario.livrosAlugados << '\n';
     }
 
     // Fechar o arquivo de saída
-    arquivoSaida.close();
+    arquivo_atualizado.close();
 
     std::cout << "Perfil alterado com sucesso!\n";
 }
