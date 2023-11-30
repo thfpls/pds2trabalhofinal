@@ -16,7 +16,7 @@ class gerenciarUsuario {
   // @brief alterar os dados de um perfil
   // @param email, nome, livros alugados do usuário
 
-  void alterarPerfil (std::string _email,std::string _nome,std::string _livrosAlugados);
+  void alterarPerfil (std::string email,std::string novoNome,std::string _livrosAlugados);
 
   //verificar se existe algum perfil com o email de entrada
   //se existir, igualas todos os seus dados para os que entram na função acima
