@@ -42,57 +42,57 @@ void gerenciarUsuario::deletarPerfil (std::string _email){
     }
 }
 
-void gerenciarUsuario::alterarPerfil (std::string _email, std::string _nome, std::string _livrosAlugados){
+void alterarPerfil(const std::string& arquivoCSV, const std::string& email, const std::string& novoNome, const std::string& novosLivrosAlugados) {
+    // Abrir o arquivo CSV
     std::ifstream arquivo_usuarios("files/usuarios.csv");
-    std::ofstream arquivo_usuariost("temporario.csv");  // Arquivo temporário para armazenar as alterações
-
-    if (!arquivo_usuarios.is_open() || !arquivo_usuariost.is_open()) {
-        std::cout << "Erro ao abrir o arquivo." << std::endl;
+    if (!arquivo.is_open()) {
+        std::cout << "Erro ao abrir o arquivo CSV.\n";
         return;
     }
 
+    // Criar um vetor para armazenar os dados do arquivo
+    std::vector<Usuario> usuarios;
     std::string linha;
-    std::vector<std::string> linhasAlteradas;
 
-    while (getline(arquivo_usuarios, linha)) {
-        std::istringstream streamLinha(linha);
-        std::string valor;
+    // Ler e analisar cada linha do arquivo
+    while (std::getline(arquivo, linha)) {
+        std::istringstream ss(linha);
+        std::string email, nome, livrosAlugados;
 
-        std::vector<std::string> valoresLinha;
-        while (getline(streamLinha, valor, ',')) {
-            valoresLinha.push_back(valor);
-        }
+        // Extrair os campos da linha
+        std::getline(ss, email, ',');
+        std::getline(ss, nome, ',');
+        std::getline(ss, livrosAlugados, ',');
 
-        // Suponha que o nome está na primeira coluna
-        if (valoresLinha.size() > 0 && valoresLinha[0] == nome) {
-            // Altera os dados do perfil
-            valoresLinha[1] = novoPerfil.nome;
-            valoresLinha[2] = novoPerfil.sobrenome;
-            // Adicione mais linhas para outros campos conforme necessário
+        // Criar um objeto Usuario e adicionar ao vetor
+        usuarios.push_back({email, nome, livrosAlugados});
+    }
 
-            // Atualiza a linha com os novos valores
-            std::ostringstream linhaAtualizada;
-            for (const auto& v : valoresLinha) {
-                linhaAtualizada << std::quoted(v) << ",";
-            }
+    // Fechar o arquivo
+    arquivo.close();
 
-            linhasAlteradas.push_back(linhaAtualizada.str());
-        } else {
-            linhasAlteradas.push_back(linha);
+    // Procurar pelo usuário com o email fornecido
+    for (Usuario& usuario : usuarios) {
+        if (usuario.email == email) {
+            // Alterar os dados do usuário
+            usuario.nome = novoNome;
+            usuario.livrosAlugados = novosLivrosAlugados;
+            break; // Parar a busca, pois já encontramos o usuário
         }
     }
 
-    arquivoEntrada.close();
+    // Abrir o arquivo novamente para escrita
+    std::ofstream arquivoSaida(arquivoCSV);
 
-    // Escreve as linhas alteradas no arquivo temporário
-    for (const auto& linha : linhasAlteradas) {
-        arquivoSaida << linha << std::endl;
+    // Escrever os dados atualizados no arquivo
+    for (const Usuario& usuario : usuarios) {
+        arquivoSaida << usuario.email << ',' << usuario.nome << ',' << usuario.livrosAlugados << '\n';
     }
 
+    // Fechar o arquivo de saída
     arquivoSaida.close();
 
-    // Renomeia o arquivo temporário para substituir o original
-    std::rename("temporario.csv", nomeArquivo.c_str());
+    std::cout << "Perfil alterado com sucesso!\n";
 }
 
 
