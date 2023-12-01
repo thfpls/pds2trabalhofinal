@@ -5,6 +5,14 @@
 Livro::Livro(const std::string& titulo, const std::string& autor, int anoPublicacao)
     : titulo(titulo), autor(autor), anoPublicacao(anoPublicacao), disponivel(true) {}
 
+void Livro::alugar() {
+    disponivel = false;
+}
+
+void Livro::devolver() {
+    disponivel = true;
+}
+
 std::string Livro::getTitulo() const {
     return titulo;
 }
