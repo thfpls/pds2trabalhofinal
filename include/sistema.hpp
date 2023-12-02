@@ -21,15 +21,15 @@ public:
      */
     Sistema();
 
+     /**
+     * @brief Carrega o vetor de livros a partir de um arquivo CSV.
+     */
+    void carregarVetor();
+
     /**
      * @brief Inicializa o sistema.
      */
     void inicia_sistema();
-
-    /**
-     * @brief Carrega o vetor de livros a partir de um arquivo CSV.
-     */
-    void carregarVetor();
 
     /**
      * @brief Exibe o menu principal e processa as opções escolhidas pelo usuário.
