@@ -6,11 +6,23 @@ Livro::Livro(const std::string& titulo, const std::string& autor, int anoPublica
     : titulo(titulo), autor(autor), anoPublicacao(anoPublicacao), disponivel(true) {}
 
 void Livro::alugar() {
-    disponivel = false;
+    if (!disponivel) {
+        std::cout << "Livro indisponível para aluguel." << std::endl;
+    } else {
+        disponivel = false;
+        GerenciarAluguel::alugarLivro(titulo);  // Adiciona o livro à lista de livros alugados
+        std::cout << "Livro alugado com sucesso." << std::endl;
+    }
 }
 
 void Livro::devolver() {
-    disponivel = true;
+    if (disponivel) {
+        std::cout << "Livro já está disponível, não pode ser devolvido." << std::endl;
+    } else {
+        disponivel = true;
+        GerenciarAluguel::devolverLivro(titulo);  // Remove o livro da lista de livros alugados
+        std::cout << "Livro devolvido com sucesso." << std::endl;
+    }
 }
 
 std::string Livro::getTitulo() const {
