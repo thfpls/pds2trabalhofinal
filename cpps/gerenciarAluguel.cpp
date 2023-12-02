@@ -14,7 +14,6 @@ void GerenciarAluguel::alugarLivro(const std::string& titulo) {
     if (it != livros.end()) {
         if (!it->estaAlugado()) {
             it->alugar();
-
             // Adiciona a informação do aluguel no arquivo CSV
             std::ofstream arquivo("alugueis.csv", std::ios::out | std::ios::app);
             if (arquivo.is_open()) {
@@ -41,7 +40,6 @@ void GerenciarAluguel::devolverLivro(const std::string& titulo) {
     if (it != livros.end()) {
         if (it->estaAlugado()) {
             it->devolver();
-
             // Remove a informação do aluguel do arquivo CSV temporário
             std::ifstream arquivoOriginal("alugueis.csv");
             std::ofstream arquivoTemporario("alugueis_temp.csv");
