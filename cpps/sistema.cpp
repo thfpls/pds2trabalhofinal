@@ -7,24 +7,6 @@ Sistema::Sistema(){
   
 }
 
-void Sistema::inicia_sistema(){
-  
-carregarVetor();
-  
-std::cout << "Ola! Bem vindo, Administrador \n"
-<< std:: endl;
-
-  std::cout << "Se identifique:" // nao sei se isso é a melhor coisa, é pq na foto do theo tem cadastrar adm ou usuario primeiro 
-  << std:: endl;
-
-  Administrador::cadastroAdm();// vou ter q adaptar pra caso ja tenha cadastro 
-
-  std::cout << "O que deseja fazer?"
-  << std:: endl;
-
-  menu_principal(); 
-}
-
 void Sistema::carregarVetor() {
         ifstream arquivo_in;
         arquivo_in.open("acervo.csv", ios::in);
@@ -71,6 +53,24 @@ void Sistema::carregarVetor() {
         // mostra erro
         cout << "Erro: Não foi possível abrir o arquivo.\n";
     }
+}
+
+void Sistema::inicia_sistema(){
+  
+carregarVetor();
+  
+std::cout << "Ola! Bem vindo, Administrador \n"
+<< std:: endl;
+
+  std::cout << "Se identifique:" // nao sei se isso é a melhor coisa, é pq na foto do theo tem cadastrar adm ou usuario primeiro 
+  << std:: endl;
+
+  Administrador::cadastroAdm();// vou ter q adaptar pra caso ja tenha cadastro 
+
+  std::cout << "O que deseja fazer?"
+  << std:: endl;
+
+  menu_principal(); 
 }
 
 void Sistema::menu_principal() {
