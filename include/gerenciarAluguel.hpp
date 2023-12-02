@@ -52,7 +52,6 @@ public:
      * @param titulo O título do livro a ser verificado.
      * @return true se o livro estiver disponível, false caso contrário.
      */
-    static bool checarDisponibilidade(const std::string& titulo);
 };
 
 #endif // GERENCIAR_ALUGUEL_HPP
