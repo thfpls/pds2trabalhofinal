@@ -1,24 +1,20 @@
 // aluno.cpp
+#include "const.hpp"
 #include "aluno.hpp"
 #include <iostream>
 #include <fstream>
 #include <sstream>
 #include <cctype>
 
-Aluno::Aluno(const std::string& nome, const std::string& email, const std::string& matricula)
-    : PerfilUsuario(nome, email), _matricula(matricula)
+Aluno::Aluno(const std::string& nome, const std::string& email, const int livros)
+    : PerfilUsuario(nome, email,livros)
 {
     _papel = ALUNO;
 }
 
-const std::string& Aluno::getMatricula() const {
-    return _matricula;
-}
-
-
 int Aluno::salvarAluno() const {
     // Abre o arquivo CSV para escrita (modo append)
-    std::ofstream arquivo("usuario.csv", std::ios::out | std::ios::app);
+    std::ofstream arquivo(ARQUSUARIO, std::ios::out | std::ios::app);
 
     // Verifica se o arquivo foi aberto com sucesso
     if (!arquivo.is_open()) {
@@ -27,7 +23,7 @@ int Aluno::salvarAluno() const {
     }
 
     // Escreve as informações do aluno no arquivo CSV
-    arquivo << "ALUNO," << getNomeUsuario() << "," << getEmailUsuario() << "," << getMatricula() << "\n";
+    arquivo << "ALUNO," << getNomeUsuario() << "," << getEmailUsuario() << "\n";
 
     // Fecha o arquivo automaticamente ao sair do escopo
     // devido à utilização do objeto std::ofstream
@@ -37,7 +33,7 @@ int Aluno::salvarAluno() const {
 
 bool Aluno::alunoJaExiste() const {
     // Abre o arquivo CSV para leitura
-    std::ifstream arquivo("usuario.csv");
+    std::ifstream arquivo(ARQUSUARIO);
 
     // Verifica se o arquivo foi aberto com sucesso
     if (!arquivo.is_open()) {
@@ -50,16 +46,15 @@ bool Aluno::alunoJaExiste() const {
     while (std::getline(arquivo, linha)) {
         // Use um stringstream para separar os campos da linha
         std::istringstream iss(linha);
-        std::string papel, nomeArquivo, emailArquivo, matriculaArquivo;
+        std::string papel, nomeArquivo, emailArquivo;
 
         // Leitura dos campos da linha
         std::getline(iss, papel, ',');
         std::getline(iss, nomeArquivo, ',');
         std::getline(iss, emailArquivo, ',');
-        std::getline(iss, matriculaArquivo, ',');
 
         // Comparação com os parâmetros fornecidos
-        if (papel == "ALUNO" && getNomeUsuario() == nomeArquivo && getEmailUsuario() == emailArquivo && getMatricula() == matriculaArquivo) {
+        if (papel == "ALUNO" && getNomeUsuario() == nomeArquivo && getEmailUsuario() == emailArquivo ) {
             // Aluno encontrado, feche o arquivo e retorne true
             arquivo.close();
             return true;
@@ -75,7 +70,7 @@ bool Aluno::alunoJaExiste() const {
 
 void Aluno::cadastroAluno() {
     // Solicitar informações do usuário
-    std::string nome, email, matricula;
+    std::string nome, email;
 
     // Verificar o nome (permitir letras e espaços)
     while (true) {
@@ -97,32 +92,12 @@ void Aluno::cadastroAluno() {
         std::cout << "Nome inválido. Use apenas letras e espaços. Tente novamente.\n";
     }
 
-    // Verificar a matrícula (permitir apenas números)
-    while (true) {
-        std::cout << "Digite a matrícula do aluno (apenas números): ";
-        std::getline(std::cin, matricula);
-
-        bool matriculaValida = true;
-        for (char c : matricula) {
-            if (!std::isdigit(c)) {
-                matriculaValida = false;
-                break;
-            }
-        }
-
-        if (matriculaValida) {
-            break;
-        }
-
-        std::cout << "Matrícula inválida. Tente novamente.\n";
-    }
-
     // Solicitar o email do aluno
     std::cout << "Digite o email do aluno: ";
     std::getline(std::cin, email);
 
     // Criar um aluno dinamicamente com base nas informações do usuário
-    Aluno novoAluno(nome, email, matricula);
+    Aluno novoAluno(nome, email, 0);
 
 
     // Verificar se o aluno já existe
