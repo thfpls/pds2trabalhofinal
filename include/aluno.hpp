@@ -1,36 +1,33 @@
 #ifndef ALUNO_HPP
 #define ALUNO_HPP
 
-#include "PerfilUsuario.hpp"
+#include "perfilUsuario.hpp"
 #include <iostream>
 #include <fstream>
 #include <sstream>
 #include <cctype>
 
-/**
- * @brief Classe que representa um Aluno, derivada da classe PerfilUsuario.
- *
- * A classe Aluno possui funcionalidades específicas para alunos,
- * como salvar informações no arquivo CSV, verificar se um aluno já existe
- * e realizar o cadastro de um novo aluno.
- */
+//@brief Classe que representa um Aluno, derivada da classe PerfilUsuario
+ 
+ // A classe Aluno possui funcionalidades específicas para alunos,
+ // como salvar informações no arquivo CSV, verificar se um aluno já existe
+ // e realizar o cadastro de um novo aluno
 class Aluno : public PerfilUsuario {
 public:
-    /**
-     * @brief Construtor da classe Aluno.
-     *
-     * @param nome O nome do aluno.
-     * @param email O email do aluno.
-     * @param matricula A matrícula do aluno.
-     */
-    Aluno(const std::string& nome, const std::string& email, const std::string& matricula);
+
+     // @brief Construtor da classe Aluno.
+     // @param nome O nome do aluno.
+     // @param email O email do aluno.
+     // @param matricula A matrícula do aluno.
+    Aluno(const std::string& nome, const std::string& email, const int livros);
 
     /**
      * @brief Obtém a matrícula do aluno.
      *
      * @return A matrícula do aluno.
      */
-    const std::string& getMatricula() const;
+    //const std::string& getMatricula() const;
+    //void setMatricula(const std::string matricula);
 
     /**
      * @brief Salva as informações do aluno no arquivo CSV.
