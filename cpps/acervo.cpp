@@ -2,114 +2,69 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <cstdio>
+
+void AcervoBiblioteca::carregarAcervo(std::string nomeArquivo){
+    std::ifstream arq(nomeArquivo);
+
+    if (!arq.is_open()) {
+        std::cerr << "Erro ao abrir arquivo: " << nomeArquivo << std::endl;
+        return;
+    }
+    acervo.clear();
+    std::string linha;
+    while (std::getline(arq, linha)) {
+        Livro l("","",0);
+	l.deCSV(linha);
+	acervo.push_back(l);
+    }
+
+    arq.close();
+    return;
+}
+
+void AcervoBiblioteca::salvarAcervo(std::string nomeArquivo){
+    std::ofstream arquivoTemp(ARQLIVROTEMP);
+
+    if (!arquivoTemp.is_open()) {
+        std::cerr << "Erro ao abrir arquivo: " << nomeArquivo << std::endl;
+        return;
+    }
+
+    for (auto& livro : acervo) {
+      std::string linha = livro.paraCSV();
+      arquivoTemp << linha << std::endl;
+    }
+
+    std::remove(nomeArquivo.c_str());
+    std::rename(ARQLIVROTEMP,nomeArquivo.c_str());
+
+    return;
+}
 
 void AcervoBiblioteca::inserirLivro() {
     using namespace std;
 
-    // Declarado o objeto pro arquivo
-    ifstream arquivo_in;
-
-    // abre "acervo.csv" modo de input
-    arquivo_in.open("acervo.csv", ios::in);
-
-    // checa se abriu direitin
-    if (arquivo_in.is_open())
-    {
-        // declara variaveis pra estocar o input do user
-        string titulo, autor;
-        int anoPublicacao;
+    Livro l1("","",0);
+    l1.deCIN();
         
-        // Prompt o usuario a botar dados
-        cout << "Digite o titulo do livro: ";
-        getline(cin, titulo);
-        cout << "Digite o nome do autor do livro: ";
-        getline(cin, autor);
-        cout << "Digite o ano de publicacao do livro: ";
-        cin >> anoPublicacao;
-        
-           // declara um vetor pra armazenar as linhas do arquivo
-        vector<string> linhas;
+    // declara uma variavel booleana pra indicar se o livro ja existe
+    bool existe = false;
 
-        // declara uma string pra armazenar uma linha do arquivo
-        string linha;
-
-        // le o arquivo e armazena as linhas no vetor
-        while (getline(arquivo_in, linha, '\n'))
-        {
-            linhas.push_back(linha);
-        }
-
-        // fecha o arquivo de input
-        arquivo_in.close();
-
-        // declara uma variavel booleana pra indicar se o livro ja existe
-        bool existe = false;
-
-        // percorre o vetor de linhas
-        for (int i = 0; i < linhas.size(); i++)
-        {
-            // declara um stringstream pra separar os campos do livro
-            stringstream ss(linhas[i]);
-
-            // declara um vetor pra armazenar os campos do livro
-            vector<string> campos;
-
-            // declara uma string pra armazenar um campo do livro
-            string campo;
-
-            // le o stringstream e armazena os campos no vetor
-            while (getline(ss, campo, ','))
-            {
-                campos.push_back(campo);
-            }
-
-            // compara os campos do livro com os parametros do usuario
-            if (campos[0] == titulo || campos[1] == autor || campos[2] == anoPublicacao)
-            {
-                // se algum campo for igual, o livro ja existe
-                existe = true;
-
-                // mostra uma mensagem de erro
-                cout << "Erro: O livro ja existe no acervo.\n";
-
-                // sai do loop
-                break;
-            }
-        }
-
-        if (!existe) {
-        // Declarado o objeto pro arquivo
-        ofstream arquivo;
-
-        // abre "acervo.csv" modo de output e append(botar novo no arquivo)
-        arquivo.open("acervo.csv", ios::out | ios::app);
-        
-        // checa se abriu direitin
-        if (arquivo.is_open())
-        {
-            // declara variaveis pra estocar o input do user
-            string titulo, autor, anoPublicacao;
-
-            // bota o livro no arquivo csv
-            arquivo << titulo << ", " << autor << ", " << anoPublicacao << ", " << "1" << "\n";
-
-            // fecha o arquivo
-            arquivo.close();
-
-            //bota o livro no runtime
-            Livro livro (titulo, autor, anoPublicacao);
-            acervo.push_back(livro);
-        
-            // atesta o sucesso
-            cout << "Livro inserido no acervo com sucesso.\n";
-        }
-        else {
-            // mostra erro
-            cout << "Erro: Não foi possível abrir o arquivo.\n";
-        }
-        }
-    return;
+    for (const auto& livro : this->acervo) {
+      if (livro.getTitulo() == l1.getTitulo()){
+	existe = true;
+	break;
+      }
     }
+    if (!existe){
+	acervo.push_back(l1);
+	salvarAcervo(ARQLIVRO);
+    }
+    return;
 }
 
 void AcervoBiblioteca::verAcervo() const {
@@ -117,10 +72,9 @@ void AcervoBiblioteca::verAcervo() const {
         std::cout << "O acervo está vazio." << std::endl;
     } else {
         std::cout << "Acervo da Biblioteca:" << std::endl;
-        for (const auto& livro : this->acervo) {
-            std::cout << "Título: " << livro.getTitulo() << ", Autor: " << livro.getAutor()
-                      << ", Ano: " << livro.getAnoPublicacao() << ", Estado: "
-                      << (livro.estaAlugado() ? "Alugado" : "Disponível") << std::endl;
+        for (auto& livro : this->acervo) {
+	    std::string linha = livro.paraCSV();
+            std::cout << linha << std::endl;
         }
     }
 }
@@ -130,34 +84,75 @@ void AcervoBiblioteca::buscarLivro() const {
 
     // Declara variável para armazenar o título a ser buscado
     string titulo;
-    cout << "Digite o título do livro a ser buscado: ";
-    getline(cin, titulo);
+    std::cout << "Digite o título do livro a ser buscado: ";
+    getline(std::cin, titulo);
 
     // Realiza a busca no acervo pelo título
     bool encontrado = false;
-    for (const auto& livro : this->const std::string& email, const std::string& novoNome, const std::string& novosLivrosAlugadosacervo) {
+    for (auto& livro : acervo) {
         if (livro.getTitulo() == titulo) {
+	    std::string linha = livro.paraCSV();
             // Exibe as informações do livro encontrado
-            cout << "Livro encontrado no acervo:" << endl;
-            cout << "Título: " << livro.getTitulo() << ", Autor: " << livro.getAutor()
-                 << ", Ano: " << livro.getAnoPublicacao() << ", Estado: "
-                 << (livro.estaAlugado() ? "Alugado" : "Disponível") << endl;
-
+            std::cout << "Livro encontrado no acervo:" << endl;
+            std::cout << linha << std::endl;
             encontrado = true;
             break; // Para a busca após encontrar o primeiro livro com o título correspondente
         }
     }
 
     if (!encontrado) {
-        cout << "Livro não encontrado no acervo." << endl;
+        std::cout << "Livro não encontrado no acervo." << endl;
     }
 }
 
-void AcervoBiblioteca::botarNoVetor(string titulo, string autor, int anoPublicacao) {
+Livro AcervoBiblioteca::localizarLivro(const std::string titulo) const {
+    using namespace std;
+
+    // Realiza a busca no acervo pelo título
+    bool encontrado = false;
+    for (auto& livro : acervo) {
+        if (livro.getTitulo() == titulo) {
+            encontrado = true;
+	    return livro;
+        }
+    }
+
+    if (!encontrado) {
+        std::cout << "Livro não encontrado no acervo." << endl;
+    }
+
+    Livro l1("","",0);
+    return l1;
+}
+
+void AcervoBiblioteca::atualizarLivro(const Livro l) {
+    using namespace std;
+    string currtit = l.getTitulo();
+
+    auto it = std::find_if(acervo.begin(), acervo.end(),
+                           [currtit](const Livro& livro)
+			   {return livro.getTitulo() == currtit;});
+    bool encontrado = false;
+    if (it!=acervo.end()){
+      it->setTitulo(l.getTitulo()); 
+      it->setAutor(l.getAutor()); 
+      it->setAnoPublicacao(l.getAnoPublicacao()); 
+      it->setDisponivel(l.getDisponivel());
+      encontrado = true;
+    }
+
+    if (!encontrado) {
+        std::cout << "Livro não encontrado no acervo." << endl;
+    }
+
+    return;
+}
+
+void AcervoBiblioteca::inserirNoVetor(std::string titulo, std::string autor, int anoPublicacao) {
     // Cria um objeto da classe Livro com os parâmetros
     Livro livro(titulo, autor, anoPublicacao);
     // Insere o objeto no final do vetor
     acervo.push_back(livro);
     // Imprime uma mensagem de confirmação
-    cout << "Livro inserido no acervo com sucesso.\n";
+    std::cout << "Livro inserido no acervo com sucesso.\n";
 };
