@@ -41,7 +41,7 @@ bool Aluno::alunoJaExiste() const {
         return false;
     }
 
-    // Formato esperado: PAPEL,NOME,EMAIL,MATRICULA
+    // Formato esperado: PAPEL,NOME,EMAIL
     std::string linha;
     while (std::getline(arquivo, linha)) {
         // Use um stringstream para separar os campos da linha
