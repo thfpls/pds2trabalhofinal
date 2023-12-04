@@ -2,8 +2,8 @@
 #include <iostream>
 #include <fstream>
 
-Administrador::Administrador(const std::string& nome, const std::string& email)
-    : PerfilUsuario(nome, email)
+Administrador::Administrador(const std::string& nome, const std::string& email, const int livros)
+    : PerfilUsuario(nome, email,livros)
 {
     // Altera o papel para ADMIN ao criar um Administrador
     _papel = ADMIN;
@@ -96,7 +96,7 @@ void Administrador::cadastroAdm() {
     std::getline(std::cin, email);
 
     // Criar um aluno dinamicamente com base nas informações do usuário
-    Administrador novoAdm(nome, email);
+    Administrador novoAdm(nome, email,0);
 
 
     // Verificar se o aluno já existe
