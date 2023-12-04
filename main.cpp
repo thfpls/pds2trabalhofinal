@@ -1,14 +1,7 @@
-#include "acervo.cpp"
-#include "adm.cpp"
-#include "aluguel.cpp"
-#include "aluno.cpp"
-#include "gerenciarAluguel.cpp"
-#include "gerenciarUsuario.cpp"
-#include "livro.cpp"
-#include "perfil_uduario.cpp"
-#include "sistema.cpp"
+#include "sistema.hpp"
 
 int main(){
-    inicia_sistema();
+    Sistema S;
+    S.inicia_sistema();
     return 0;
 }
