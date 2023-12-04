@@ -21,34 +21,19 @@ public:
      // @param matricula A matrícula do aluno.
     Aluno(const std::string& nome, const std::string& email, const int livros);
 
-    /**
-     * @brief Obtém a matrícula do aluno.
-     *
-     * @return A matrícula do aluno.
-     */
-    //const std::string& getMatricula() const;
-    //void setMatricula(const std::string matricula);
-
-    /**
-     * @brief Salva as informações do aluno no arquivo CSV.
-     *
-     * @return 0 em caso de sucesso, 1 em caso de erro.
-     */
+     // @brief Salva as informações do aluno no arquivo CSV
+     // @return 0 em caso de sucesso, 1 em caso de erro.
     int salvarAluno() const;
 
-    /**
-     * @brief Verifica se um aluno com as mesmas informações já existe.
-     *
-     * @return true se o aluno já existe, false caso contrário.
-     */
+  
+     // @brief Verifica se um aluno com as mesmas informações já existe.
+     // @return true se o aluno já existe, false caso contrário.
     bool alunoJaExiste() const;
 
-    /**
-     * @brief Realiza o cadastro de um novo aluno.
-     *
-     * Solicita informações do usuário, verifica se o aluno já existe
-     * e, se não existir, salva as informações no arquivo CSV.
-     */
+ 
+     // @brief Realiza o cadastro de um novo aluno.
+     // Solicita informações do usuário, verifica se o aluno já existe
+     // e, se não existir, salva as informações no arquivo CSV.
     void cadastroAluno();
 };
 
