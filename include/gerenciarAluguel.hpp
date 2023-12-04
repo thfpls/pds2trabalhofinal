@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include "livro.hpp"
+#include "aluguel.hpp"
 
 /**
  * @brief Classe para gerenciar o aluguel de livros.
@@ -13,15 +13,16 @@
  * definir multa e verificar a disponibilidade de livros.
  */
 class GerenciarAluguel {
-public:
-    static std::vector<Livro> livros; ///< Lista de livros disponíveis para aluguel.
+private:
+    std::vector<Aluguel> carteira; ///< Lista de livros disponíveis para aluguel.
 
+public:
     /**
      * @brief Aluga um livro específico.
      *
      * @param titulo O título do livro a ser alugado.
      */
-    void alugarLivro(const std::string& titulo);
+    void alugarLivro(const std::string& titulo, const std::string& email);
 
     /**
      * @brief Devolve um livro previamente alugado.
@@ -52,6 +53,11 @@ public:
      * @param titulo O título do livro a ser verificado.
      * @return true se o livro estiver disponível, false caso contrário.
      */
+
+     void carregarAluguel(std::string nomeArquivo);
+
+     void salvarAluguel(std::string nomeArquivo);
+     
 };
 
 #endif // GERENCIAR_ALUGUEL_HPP
