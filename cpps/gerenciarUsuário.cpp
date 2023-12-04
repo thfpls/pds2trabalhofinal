@@ -1,25 +1,109 @@
 #include "gerenciarUsuario.hpp"
+#include "perfilUsuario.hpp"
+#include "aluno.hpp"
+#include "adm.hpp"
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
+#include <vector>
+#include <cstdio>
 
-void gerenciarUsuario::deletarPerfil (std::string _email){
-    
-// verifica se o id não é do próprio admin, e depois se existe algum usuario com esse id
-    if (this->get_email_perfil_usuario() == email)
-    {
-        throw id_invalido_e();
+void GerenciarUsuario::carregarUsuarios(std::string nomeArquivo){
+    std::ifstream arq(nomeArquivo);
+
+    if (!arq.is_open()) {
+        std::cerr << "Erro ao abrir arquivo: " << nomeArquivo << std::endl;
+        return;
     }
-    else
-    {
-        std::ifstream arquivo_usuarios("files/usuarios.csv");
-        std::ofstream arquivo_atualizado("files/usuarios_temp.csv");
+
+    usuarios.clear();
+    std::string linha;
+    while (std::getline(arq, linha)) {
+        if (linha!=""){
+          PerfilUsuario u("","",0);
+	  u.deCSV(linha);
+	  usuarios.push_back(u);
+	  std::cout << "carregou " << u.paraCSV() << std::endl;
+	  imprimirPerfis();
+	}
+    }
+
+    arq.close();
+    return;
+}
+
+void GerenciarUsuario::salvarUsuarios(std::string nomeArquivo){
+    std::ofstream arquivoTemp(ARQUSUARIOTEMP);
+
+    if (!arquivoTemp.is_open()) {
+        std::cerr << "Erro ao abrir arquivo: " << nomeArquivo << std::endl;
+        return;
+    }
+
+    for (auto& usuario : usuarios) {
+      std::string linha = usuario.paraCSV();
+      arquivoTemp << linha << std::endl;
+    }
+
+    std::remove(nomeArquivo.c_str());
+    std::rename(ARQUSUARIOTEMP,nomeArquivo.c_str());
+
+    return;
+}
+
+PerfilUsuario GerenciarUsuario::localizarUsuario(std::string email){
+    using namespace std;
+
+    PerfilUsuario u1("","",0);
+        
+
+    for (const auto& usuario : usuarios) {
+      if (usuario.getEmailUsuario() == email){
+        u1 = usuario; 
+	break;
+      }
+    }
+    return u1;
+}
+
+
+void GerenciarUsuario::inserirUsuario(){
+    using namespace std;
+
+    PerfilUsuario u1("","",0);
+    u1.deCIN();
+        
+    // declara uma variavel booleana pra indicar se o livro ja existe
+    bool existe = false;
+
+    for (const auto& usuario : usuarios) {
+      if (usuario.getEmailUsuario() == u1.getEmailUsuario()){
+	existe = true;
+	break;
+      }
+    }
+    if (!existe){
+	usuarios.push_back(u1);
+	salvarUsuarios(ARQUSUARIO);
+    }
+    return;
+}
+
+
+void GerenciarUsuario::deletarPerfil (std::string email){
+    
+        std::ifstream arquivo_usuarios(ARQUSUARIO);
+        std::ofstream arquivo_atualizado(ARQUSUARIOTEMP);
         std::string linha;
 
-        while (getline(arquivo_usuarios, linha))
+        while (std::getline(arquivo_usuarios, linha))
         {
             std::istringstream iss(linha);
             std::string campo;
             bool email_encontrado = false;
 
-            while (getline(iss, campo, ','))
+            while (std::getline(iss, campo, ','))
             {
                 if (campo == email)
                 {
@@ -37,56 +121,58 @@ void gerenciarUsuario::deletarPerfil (std::string _email){
         arquivo_usuarios.close();
         arquivo_atualizado.close();
 
-        remove("files/usuarios.csv");
-        rename("files/usuarios_temp.csv", "files/usuarios.csv");
-    }
+        remove(ARQUSUARIO);
+        rename(ARQUSUARIOTEMP,ARQUSUARIO);
 }
 
-void alterarPerfil(const std::string& email, const std::string& novoNome, const std::string& novosLivrosAlugados) {
+void alterarPerfil(const std::string& email, const std::string& novoNome, const int novosLivrosAlugados) {
     // Abrir o arquivo CSV
-    std::ifstream arquivo_usuarios("files/usuarios.csv");
-    if (!arquivo.is_open()) {
+    std::ifstream arquivo_usuarios(ARQUSUARIO);
+    if (!arquivo_usuarios.is_open()) {
         std::cout << "Erro ao abrir o arquivo CSV.\n";
         return;
     }
 
     // Criar um vetor para armazenar os dados do arquivo
-    std::vector<Usuario> usuarios;
+    std::vector<PerfilUsuario> usuarios;
     std::string linha;
 
     // Ler e analisar cada linha do arquivo
-    while (std::getline(arquivo, linha)) {
+    while (std::getline(arquivo_usuarios, linha)) {
         std::istringstream ss(linha);
-        std::string email, nome, livrosAlugados;
+        std::string email, nome, strlivros;
+	int livrosAlugados;
 
         // Extrair os campos da linha
         std::getline(ss, email, ',');
         std::getline(ss, nome, ',');
-        std::getline(ss, livrosAlugados, ',');
+        std::getline(ss, strlivros, ',');
+        livrosAlugados = std::stoi(strlivros);
 
         // Criar um objeto Usuario e adicionar ao vetor
-        usuarios.push_back({email, nome, livrosAlugados});
+	PerfilUsuario usuario(email, nome, livrosAlugados);
+        usuarios.push_back(usuario);
     }
 
     // Fechar o arquivo
-    arquivo.close();
+    arquivo_usuarios.close();
 
     // Procurar pelo usuário com o email fornecido
-    for (Usuario& usuario : usuarios) {
-        if (usuario.email == email) {
+    for (PerfilUsuario& usuario : usuarios) {
+        if (usuario.getEmailUsuario() == email) {
             // Alterar os dados do usuário
-            usuario.nome = novoNome;
-            usuario.livrosAlugados = novosLivrosAlugados;
+            usuario.setEmailUsuario(novoNome);
+            usuario.setLivrosAlugados(novosLivrosAlugados);
             break; // Parar a busca, pois já encontramos o usuário
         }
     }
 
     // Abrir o arquivo novamente para escrita
-    std::ofstream arquivo_atualizado("files/usuarios_temp.csv");
+    std::ofstream arquivo_atualizado(ARQUSUARIOTEMP);
 
     // Escrever os dados atualizados no arquivo
-    for (const Usuario& usuario : usuarios) {
-        arquivo_atualizado << usuario.email << ',' << usuario.nome << ',' << usuario.livrosAlugados << '\n';
+    for (PerfilUsuario& usuario : usuarios) {
+        arquivo_atualizado << usuario.getEmailUsuario() << ',' << usuario.getNomeUsuario() << ',' << usuario.getLivrosAlugados() << '\n';
     }
 
     // Fechar o arquivo de saída
@@ -96,8 +182,14 @@ void alterarPerfil(const std::string& email, const std::string& novoNome, const 
 }
 
 
-void gerenciarUsuario::imprimirPerfis (){
-    std::ifstream arquivo_usuarios("files/usuarios.csv");
+void GerenciarUsuario::imprimirPerfis (){
+    for (auto& usuario : usuarios) {
+      std::string linha = usuario.paraCSV();
+      std::cout << linha << std::endl;
+    }
+
+  /*
+    std::ifstream arquivo_usuarios(ARQUSUARIO);
     if (!arquivo_usuarios) {
         std::cout << "Falha ao abrir o arquivo" << std::endl;
         return;
@@ -105,9 +197,8 @@ void gerenciarUsuario::imprimirPerfis (){
 
     std::string linha;
     while (getline(arquivo_usuarios, linha)){
-        std::cout << this->get_email_perfil_usuario() << "," 
-                  << this->get_nome_perfil_usuario() << "," 
-                  << this->get_livros_alugados_perfil_usuario()<<std::endl;
+        std::cout << linha << std::endl;
     }
     arquivo_usuarios.close();
+    */
 }
