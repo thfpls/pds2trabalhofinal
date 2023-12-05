@@ -4,9 +4,9 @@ Esse sistema permite que o bibliotecário acesse o acervo da biblioteca, cadastr
 
 # Como compilar: 
 Tenha um linux instalado, clone o repositório, abra o terminal, entre na pasta do repositório e rode os comandos: 
- make build
- make test
- make run
+- make build
+- make test
+- make run
 
 # Integrantes:
 - Gustavo Vasconcellos de Andrade - 2023061576
