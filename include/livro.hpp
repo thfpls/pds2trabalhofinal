@@ -41,6 +41,12 @@ public:
      * @return O ano de publicação do livro.
      */
     int getAnoPublicacao() const;
+    bool getDisponivel() const;
+
+    void setTitulo(const std::string novotitulo);
+    void setAutor(const std::string novoautor);
+    void setAnoPublicacao(const int novoano);
+    void setDisponivel(const bool disp);
 
     /**
      * @brief Verifica se o livro está disponível para aluguel.
@@ -67,6 +73,12 @@ public:
      * @brief Marca o livro como disponível para aluguel.
      */
     void devolver();
+
+    void deCSV(const std::string& linha);
+
+    void deCIN();
+
+    std::string paraCSV () const;
 
 private:
     std::string titulo;          ///< O título do livro.
