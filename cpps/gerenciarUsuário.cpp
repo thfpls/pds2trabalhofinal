@@ -24,8 +24,8 @@ void GerenciarUsuario::carregarUsuarios(std::string nomeArquivo){
           PerfilUsuario u("","",0);
 	  u.deCSV(linha);
 	  usuarios.push_back(u);
-	  std::cout << "carregou " << u.paraCSV() << std::endl;
-	  imprimirPerfis();
+	  //std::cout << "carregou " << u.paraCSV() << std::endl;
+	  //imprimirPerfis();
 	}
     }
 
@@ -105,9 +105,10 @@ void GerenciarUsuario::deletarPerfil (std::string email){
 
             while (std::getline(iss, campo, ','))
             {
-                if (campo == email)
-                {
+	        //std::cout << campo << "X" << email << std::endl;
+                if (campo == email) {
                     email_encontrado = true;
+		    //std::cout << "encontrado" << std::endl;
                     break;
                 }
             }
