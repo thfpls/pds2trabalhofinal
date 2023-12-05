@@ -16,39 +16,38 @@
 #include <sstream>
 #include <string>
 
-/**
- * @brief Classe que representa o sistema da biblioteca.
- */
+
+ // @brief Classe que representa o sistema da biblioteca.
+ 
 class Sistema {
 public:
-    /**
-     * @brief Construtor padrão da classe Sistema.
-     */
+    
+     // @brief Construtor padrão da classe Sistema.
+     
     Sistema(){};
 
-    /**
-     * @brief Inicializa o sistema.
-     */
+
+     /// @brief Inicializa o sistema.
     void inicia_sistema();
 
-    /**
-     * @brief Exibe o menu principal e processa as opções escolhidas pelo usuário.
-     */
+
+     /// @brief Exibe o menu principal e processa as opções escolhidas pelo usuário.
+
     void menu_principal();
 
-    /**
-     * @brief Exibe o menu de gerenciamento de aluno
-     */
+
+     /// @brief Exibe o menu de gerenciamento de aluno
+
     void menu_aluno();
 
-    /**
-     * @brief Exibe o menu de gerenciamento de livro
-     */
+
+     /// @brief Exibe o menu de gerenciamento de livro
+
     void menu_livro();
 
-    /**
-     * @brief Exibe o menu de gerenciamento de aluguel
-     */
+
+     /// @brief Exibe o menu de gerenciamento de aluguel
+
     void menu_aluguel();
 
 private:
