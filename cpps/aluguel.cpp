@@ -29,7 +29,7 @@ void Aluguel::deCSV(const std::string& linha){
   std::istringstream ss(linha);
   std::string aux;
 
-  std::cout << "deCSV "<< linha << std::endl;
+  //std::cout << "deCSV "<< linha << std::endl;
   std::getline(ss,titulo,',');
   std::getline(ss,email,',');
   std::getline(ss,aux,',');
@@ -48,5 +48,4 @@ std::string Aluguel::paraCSV() const{
 
   return oss.str();
 }
-
 
