@@ -4,10 +4,14 @@ SRC = cpps
 OBJ = obj
 INC = include
 BIN = bin
+TST = testes
+
 OBJS = $(OBJ)/acervo.o  $(OBJ)/aluguel.o $(OBJ)/gerenciarAluguel.o $(OBJ)/livro.o $(OBJ)/sistema.o $(OBJ)/adm.o $(OBJ)/aluno.o $(OBJ)/gerenciarUsuario.o $(OBJ)/perfilUsuario.o
 
 HDRS = $(INC)/acervo.hpp  $(INC)/aluguel.hpp $(INC)/gerenciarAluguel.hpp $(INC)/livro.hpp $(INC)/sistema.hpp $(INC)/adm.hpp $(INC)/aluno.hpp $(INC)/gerenciarUsuario.hpp $(INC)/perfilUsuario.hpp
+
 EFLAGS = -g -Wall -I$(INC)
+
 CFLAGS = -g -Wall -c -I$(INC)
 
 run: $(BIN)/sistema
@@ -23,24 +27,24 @@ test: $(BIN)/livroteste $(BIN)/acervoteste $(BIN)/perfilUsuarioteste $(BIN)/gere
 	$(BIN)/aluguelteste 
 	$(BIN)/gerenciarAluguelteste
 
-$(BIN)/aluguelteste: $(OBJ)/aluguel.o $(SRC)/aluguelteste.cpp
-	$(CC) -o $(BIN)/aluguelteste $(EFLAGS) $(OBJ)/aluguel.o $(SRC)/aluguelteste.cpp
+$(BIN)/aluguelteste: $(OBJ)/aluguel.o $(TST)/aluguelteste.cpp
+	$(CC) -o $(BIN)/aluguelteste $(EFLAGS) $(OBJ)/aluguel.o $(TST)/aluguelteste.cpp
 
-$(BIN)/gerenciarAluguelteste: $(OBJ)/livro.o $(OBJ)/acervo.o $(OBJ)/gerenciarUsuario.o $(OBJ)/perfilUsuario.o $(OBJ)/adm.o $(OBJ)/aluno.o $(OBJ)/aluguel.o $(OBJ)/gerenciarAluguel.o $(SRC)/gerenciarAluguelteste.cpp
-	$(CC) -o $(BIN)/gerenciarAluguelteste $(EFLAGS) $(OBJ)/livro.o $(OBJ)/acervo.o $(OBJ)/aluno.o $(OBJ)/adm.o $(OBJ)/perfilUsuario.o $(OBJ)/gerenciarUsuario.o $(OBJ)/aluguel.o $(OBJ)/gerenciarAluguel.o $(SRC)/gerenciarAluguelteste.cpp
+$(BIN)/gerenciarAluguelteste: $(OBJ)/livro.o $(OBJ)/acervo.o $(OBJ)/gerenciarUsuario.o $(OBJ)/perfilUsuario.o $(OBJ)/adm.o $(OBJ)/aluno.o $(OBJ)/aluguel.o $(OBJ)/gerenciarAluguel.o $(TST)/gerenciarAluguelteste.cpp
+	$(CC) -o $(BIN)/gerenciarAluguelteste $(EFLAGS) $(OBJ)/livro.o $(OBJ)/acervo.o $(OBJ)/aluno.o $(OBJ)/adm.o $(OBJ)/perfilUsuario.o $(OBJ)/gerenciarUsuario.o $(OBJ)/aluguel.o $(OBJ)/gerenciarAluguel.o $(TST)/gerenciarAluguelteste.cpp
 
 
-$(BIN)/gerenciarUsuarioteste: $(OBJ)/gerenciarUsuario.o $(OBJ)/perfilUsuario.o $(OBJ)/adm.o $(OBJ)/aluno.o $(SRC)/gerenciarUsuarioteste.cpp
-	$(CC) -o $(BIN)/gerenciarUsuarioteste $(EFLAGS) $(OBJ)/aluno.o $(OBJ)/adm.o $(OBJ)/perfilUsuario.o $(OBJ)/gerenciarUsuario.o $(SRC)/gerenciarUsuarioteste.cpp
+$(BIN)/gerenciarUsuarioteste: $(OBJ)/gerenciarUsuario.o $(OBJ)/perfilUsuario.o $(OBJ)/adm.o $(OBJ)/aluno.o $(TST)/gerenciarUsuarioteste.cpp
+	$(CC) -o $(BIN)/gerenciarUsuarioteste $(EFLAGS) $(OBJ)/aluno.o $(OBJ)/adm.o $(OBJ)/perfilUsuario.o $(OBJ)/gerenciarUsuario.o $(TST)/gerenciarUsuarioteste.cpp
 
-$(BIN)/perfilUsuarioteste: $(OBJ)/aluno.o $(OBJ)/adm.o $(OBJ)/perfilUsuario.o $(SRC)/perfilUsuarioteste.cpp
-	$(CC) -o $(BIN)/perfilUsuarioteste $(EFLAGS) $(OBJ)/aluno.o $(OBJ)/adm.o $(OBJ)/perfilUsuario.o $(SRC)/perfilUsuarioteste.cpp
+$(BIN)/perfilUsuarioteste: $(OBJ)/aluno.o $(OBJ)/adm.o $(OBJ)/perfilUsuario.o $(TST)/perfilUsuarioteste.cpp
+	$(CC) -o $(BIN)/perfilUsuarioteste $(EFLAGS) $(OBJ)/aluno.o $(OBJ)/adm.o $(OBJ)/perfilUsuario.o $(TST)/perfilUsuarioteste.cpp
 
-$(BIN)/acervoteste: $(OBJ)/acervo.o $(OBJ)/livro.o $(SRC)/acervoteste.cpp
-	$(CC) -o $(BIN)/acervoteste $(EFLAGS) $(OBJ)/acervo.o $(OBJ)/livro.o $(SRC)/acervoteste.cpp
+$(BIN)/acervoteste: $(OBJ)/acervo.o $(OBJ)/livro.o $(TST)/acervoteste.cpp
+	$(CC) -o $(BIN)/acervoteste $(EFLAGS) $(OBJ)/acervo.o $(OBJ)/livro.o $(TST)/acervoteste.cpp
 
-$(BIN)/livroteste: $(OBJ)/livro.o $(SRC)/livroteste.cpp
-	$(CC) -o $(BIN)/livroteste $(EFLAGS) $(OBJ)/livro.o $(SRC)/livroteste.cpp
+$(BIN)/livroteste: $(OBJ)/livro.o $(TST)/livroteste.cpp
+	$(CC) -o $(BIN)/livroteste $(EFLAGS) $(OBJ)/livro.o $(TST)/livroteste.cpp
 
 $(BIN)/sistema: $(OBJS) $(SRC)/main.cpp
 	$(CC) -o $(BIN)/sistema $(EFLAGS) $(OBJS) $(SRC)/main.cpp
