@@ -12,7 +12,7 @@ Administrador::Administrador(const std::string& nome, const std::string& email, 
 int Administrador::salvarAdm()
 {
     // Cria um objeto ofstream e o associa ao arquivo "usuario.csv"
-    std::ofstream arquivo("usuario.csv", std::ios::out | std::ios::app);
+    std::ofstream arquivo(ARQUSUARIO, std::ios::out | std::ios::app);
 
     // Verifica se o arquivo foi aberto com sucesso
     if (!arquivo.is_open())
