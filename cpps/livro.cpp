@@ -1,6 +1,8 @@
 #include "livro.hpp"
 #include "acervo.hpp"
 #include <iostream>
+#include <string>
+#include <algorithm>
 
 Livro::Livro(const std::string& titulo, const std::string& autor, int anoPublicacao)
     : titulo(titulo), autor(autor), anoPublicacao(anoPublicacao), disponivel(true) {}
@@ -10,7 +12,7 @@ void Livro::alugar() {
         std::cout << "Livro indisponível para aluguel." << std::endl;
     } else {
         disponivel = false;
-        GerenciarAluguel::alugarLivro(titulo);  // Adiciona o livro à lista de livros alugados
+        // GerenciarAluguel::alugarLivro(titulo);  // Adiciona o livro à lista de livros alugados
         std::cout << "Livro alugado com sucesso." << std::endl;
     }
 }
@@ -20,7 +22,7 @@ void Livro::devolver() {
         std::cout << "Livro já está disponível, não pode ser devolvido." << std::endl;
     } else {
         disponivel = true;
-        GerenciarAluguel::devolverLivro(titulo);  // Remove o livro da lista de livros alugados
+        //GerenciarAluguel::devolverLivro(titulo);  // Remove o livro da lista de livros alugados
         std::cout << "Livro devolvido com sucesso." << std::endl;
     }
 }
@@ -37,43 +39,87 @@ int Livro::getAnoPublicacao() const {
     return anoPublicacao;
 }
 
-bool Livro::estaAlugado() const {
+bool Livro::getDisponivel() const {
     return disponivel;
 }
 
 
+void Livro::setTitulo(const std::string novotitulo) {
+    titulo = novotitulo;
+    return;
+}
 
-void Livro::alterarLivro() {
+void Livro::setAutor(const std::string novoautor) {
+    autor = novoautor;
+    return;
+}
+
+void Livro::setAnoPublicacao(const int novoano) {
+    anoPublicacao = novoano;
+    return;
+}
+
+void Livro::setDisponivel(const bool disp) {
+    disponivel = disp;
+    return;
+}
+
+bool Livro::estaAlugado() const {
+    return !disponivel;
+}
+
+void Livro::alterarLivro(const std::string& novoTitulo, const std::string& novoAutor, int novoAnoPublicacao) {
     using namespace std;
 
-    // Declara variável para armazenar o título do livro a ser alterado
-    string titulo;
-    cout << "Digite o título do livro a ser alterado: ";
-    getline(cin, titulo);
+    titulo = novoTitulo;
+    autor = novoAutor;
+    anoPublicacao = novoAnoPublicacao;
 
-    // Realiza a busca no acervo pelo título
-    auto it = std::find_if(acervo.begin(), acervo.end(), [titulo](const Livro& livro) {
-        return livro.getTitulo() == titulo;
-    });
+    cout << "Livro alterado com sucesso." << endl;
+}
 
-    if (it != acervo.end()) {
-        // Livro encontrado, solicita as novas informações
-        string novoTitulo, novoAutor;
-        int novoAnoPublicacao;
+void Livro::deCSV(const std::string& linha){
+  std::istringstream ss(linha);
+  std::string aux;
 
-        cout << "Digite o novo título: ";
-        getline(cin, novoTitulo);
-        cout << "Digite o novo autor: ";
-        getline(cin, novoAutor);
-        cout << "Digite o novo ano de publicacao: ";
-        cin >> novoAnoPublicacao;
+  std::cout << "deCSV "<< linha << std::endl;
+  std::getline(ss,titulo,',');
+  std::getline(ss,autor,',');
+  std::getline(ss,aux,',');
+  anoPublicacao = std::stoi(aux);
+  std::getline(ss,aux,',');
+  //remover espacos em branco
+  aux.erase(std::remove_if(aux.begin(), aux.end(), ::isspace), aux.end());
+  disponivel = (aux == "D" ? true : false); 
+}
 
-        // Limpa o buffer do teclado após a leitura do ano
-        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+std::string Livro::paraCSV() const{
+  std::ostringstream oss;
 
-        // Altera as informações do livro
-        it->alterarLivro(novoTitulo, novoAutor, novoAnoPublicacao);
+  oss << titulo << ", "
+      << autor << ", "
+      << anoPublicacao << ", "
+      << (disponivel ? "D" : "I");
 
+  return oss.str();
+}
+
+void Livro::deCIN(){
+  using namespace std;
+  string aux;
+
+  cout << "Digite o título: ";
+  getline(cin, titulo);
+  cout << "Digite o autor: ";
+  getline(cin, autor);
+  cout << "Digite o ano de publicacao: ";
+  if (cin >> anoPublicacao){
+    disponivel = true;
+  } else {
+    std::cout << "Ano invalido" << std::endl;
+  }
+  std::cin.get();
+}
         cout << "Livro alterado com sucesso." << endl;
     } else {
         cout << "Livro não encontrado no acervo." << endl;
