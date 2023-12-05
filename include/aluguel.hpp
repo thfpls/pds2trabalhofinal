@@ -1,10 +1,31 @@
+#ifndef ALUGUELHPP
+#define ALUGUELHPP
+
 #include "livro.hpp"
-#include "gerenciarAluguel.hpp"
+#include "acervo.hpp" 
 
 #include <string>
 
 class Aluguel {
-  public:
-  // @brief conferir se algum livro está alugado, checando com a função de livro.hpp
-  void checarDisponibilidade (std:: string Titulo; std:: string Disponibilidade);
+public:
+
+  Aluguel(std::string titulo, std::string email);
+
+  void definirPrazo(int dias);  
+  void aumentarPrazo(int dias);  
+  void definirMulta(double multa);
+  int getPrazoDevolucao();
+  std::string getTitulo() const;
+
+  void deCSV(const std::string& linha);
+
+  std::string paraCSV() const;
+
+private:
+  int prazo;
+  double multa;
+  std::string titulo;
+  std::string email;
 };
+
+#endif
