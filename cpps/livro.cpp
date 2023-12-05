@@ -120,8 +120,3 @@ void Livro::deCIN(){
   }
   std::cin.get();
 }
-        cout << "Livro alterado com sucesso." << endl;
-    } else {
-        cout << "Livro não encontrado no acervo." << endl;
-    }
-}
