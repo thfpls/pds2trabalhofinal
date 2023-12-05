@@ -49,3 +49,4 @@ std::string Aluguel::paraCSV() const{
   return oss.str();
 }
 
+
