@@ -56,6 +56,8 @@ public:
 
      void carregarAluguel(std::string nomeArquivo);
 
+     void listarAluguel(std::string nomeArquivo);
+
      void salvarAluguel(std::string nomeArquivo);
      
 };
