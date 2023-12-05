@@ -156,3 +156,4 @@ void AcervoBiblioteca::inserirNoVetor(std::string titulo, std::string autor, int
     // Imprime uma mensagem de confirmação
     std::cout << "Livro inserido no acervo com sucesso.\n";
 };
+
