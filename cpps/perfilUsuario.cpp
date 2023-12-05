@@ -2,6 +2,8 @@
 #include "aluno.hpp"
 #include "adm.hpp" 
 #include <algorithm>
+#include <iostream>
+#include <limits>
 //implementar o construtor
 
 PerfilUsuario::PerfilUsuario(const std::string& nome, const std::string& email, const int livros) : _nome_perfil_usuario(nome), _email_perfil_usuario(email), _livrosAlugados(livros), _papel(ALUNO)
@@ -50,7 +52,6 @@ void PerfilUsuario::deCSV(const std::string& linha){
   std::istringstream ss(linha);
   std::string aux; 
 
-  std::cout << "deCSV "<< linha << std::endl;
   std::getline(ss,_nome_perfil_usuario,',');
   std::getline(ss,_email_perfil_usuario,',');
   std::getline(ss,aux,',');
@@ -65,7 +66,7 @@ void PerfilUsuario::deCIN(){
   using namespace std;
   std::string aux; 
 
-  cout << "deCIN " << std::endl;
+  std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   cout << "Digite o nome:";
   getline(cin,_nome_perfil_usuario);
   cout << "Digite o email:";
@@ -94,9 +95,9 @@ std::string PerfilUsuario::paraCSV(){
 
   std::string aux = (_papel == ADMIN ? "ADMIN" : "ALUNO");
 
-  oss << _nome_perfil_usuario << ", "
-      << _email_perfil_usuario << ", "
-      << _livrosAlugados << ", "
+  oss << _nome_perfil_usuario << ","
+      << _email_perfil_usuario << ","
+      << _livrosAlugados << ","
       << aux;
 
   return oss.str();
