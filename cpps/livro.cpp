@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
+#include <limits>
 
 Livro::Livro(const std::string& titulo, const std::string& autor, int anoPublicacao)
     : titulo(titulo), autor(autor), anoPublicacao(anoPublicacao), disponivel(true) {}
@@ -82,7 +83,6 @@ void Livro::deCSV(const std::string& linha){
   std::istringstream ss(linha);
   std::string aux;
 
-  std::cout << "deCSV "<< linha << std::endl;
   std::getline(ss,titulo,',');
   std::getline(ss,autor,',');
   std::getline(ss,aux,',');
@@ -108,6 +108,7 @@ void Livro::deCIN(){
   using namespace std;
   string aux;
 
+  std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   cout << "Digite o título: ";
   getline(cin, titulo);
   cout << "Digite o autor: ";
