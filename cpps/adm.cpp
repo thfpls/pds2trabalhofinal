@@ -1,3 +1,4 @@
+#include "const.hpp"
 #include "adm.hpp"
 #include <iostream>
 #include <fstream>
@@ -22,7 +23,7 @@ int Administrador::salvarAdm()
     }
 
     // Escreve as informações do administrador no arquivo CSV
-    arquivo << "ADMIN," << getNomeUsuario() << "," << getEmailUsuario() << "\n";
+    arquivo << getNomeUsuario() << "," << getEmailUsuario() << ",0,ADMIN\n";
 
     // Fecha o arquivo automaticamente ao sair do escopo
     // devido à utilização do objeto std::ofstream
