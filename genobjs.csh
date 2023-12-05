@@ -1,9 +1,0 @@
-make obj/acervo.o
-make obj/adm.o
-make obj/aluguel.o
-make obj/aluno.o
-make obj/gerenciarAluguel.o
-make obj/gerenciarUsuario.o
-make obj/livro.o
-make obj/perfil_usuario.o
-make obj/sistema.o
