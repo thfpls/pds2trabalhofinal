@@ -7,6 +7,23 @@
 #include <iostream>
 #include <algorithm>
 
+void GerenciarAluguel::listarAluguel(std::string nomeArquivo){
+    std::ifstream arq(nomeArquivo);
+
+    if (!arq.is_open()) {
+        std::cerr << "Erro ao abrir arquivo: " << nomeArquivo << std::endl;
+        return;
+    }
+
+    std::string linha;
+    while (std::getline(arq, linha)) {
+	std::cout << linha << std::endl;
+    }
+
+    arq.close();
+    return;
+}
+
 
 void GerenciarAluguel::carregarAluguel(std::string nomeArquivo){
     std::ifstream arq(nomeArquivo);
@@ -66,7 +83,7 @@ void GerenciarAluguel::alugarLivro(const std::string& titulo, const std::string 
 
         std::ofstream arquivo(ARQALUGUEL, std::ios::out | std::ios::app);
         if (arquivo.is_open()) {
-          arquivo << titulo << "," << email << ", 1, 0.0" << "\n";
+          arquivo << titulo << "," << email << ",1,0.0" << "\n";
           arquivo.close();
         } else {
           std::cerr << "Erro ao abrir o arquivo de alugueis." << std::endl;
@@ -187,4 +204,3 @@ void GerenciarAluguel::definirMulta(const std::string& titulo, double multa) {
         std::cout << "Livro não encontrado." << std::endl;
     }
 }
-
