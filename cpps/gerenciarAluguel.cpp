@@ -187,4 +187,3 @@ void GerenciarAluguel::definirMulta(const std::string& titulo, double multa) {
         std::cout << "Livro não encontrado." << std::endl;
     }
 }
-
