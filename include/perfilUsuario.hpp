@@ -4,6 +4,9 @@
 
 #include <iostream>
 
+//class Aluno; // Declarando a classe Aluno para evitar referência circular**
+
+
 /// @brief Enumeração que representa o papel do usuário
 enum Papel_do_usuario
 {
