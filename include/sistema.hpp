@@ -37,9 +37,19 @@ public:
     void menu_principal();
 
     /**
-     * @brief Exibe o menu de busca após a realização de uma busca por livro.
+     * @brief Exibe o menu de gerenciamento de aluno
      */
-    void menu_de_busca(std::string titulo);
+    void menu_aluno();
+
+    /**
+     * @brief Exibe o menu de gerenciamento de livro
+     */
+    void menu_livro();
+
+    /**
+     * @brief Exibe o menu de gerenciamento de aluguel
+     */
+    void menu_aluguel();
 
 private:
 };
