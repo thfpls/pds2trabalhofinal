@@ -32,7 +32,7 @@ int Administrador::salvarAdm()
 
 bool Administrador::admJaExiste() const {
     // Abre o arquivo CSV para leitura
-    std::ifstream arquivo("usuario.csv");
+    std::ifstream arquivo(ARQUSUARIO);
 
     // Verifica se o arquivo foi aberto com sucesso
     if (!arquivo.is_open()) {
