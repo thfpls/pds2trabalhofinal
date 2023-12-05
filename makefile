@@ -78,3 +78,6 @@ $(OBJ)/sistema.o: $(SRC)/sistema.cpp $(HDRS)
 
 clean:
 	rm -f $(OBJS) $(BIN)/*
+
+$(shell mkdir -p $(BIN))
+$(shell mkdir -p $(OBJ))
