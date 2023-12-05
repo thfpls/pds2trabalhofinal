@@ -1,123 +1,110 @@
-#include "livro.hpp"
-#include "acervo.hpp"
-#include <iostream>
-#include <string>
+#include "perfilUsuario.hpp"
+#include "aluno.hpp"
+#include "adm.hpp" 
 #include <algorithm>
+#include <iostream>
 #include <limits>
+//implementar o construtor
 
-Livro::Livro(const std::string& titulo, const std::string& autor, int anoPublicacao)
-    : titulo(titulo), autor(autor), anoPublicacao(anoPublicacao), disponivel(true) {}
-
-void Livro::alugar() {
-    if (!disponivel) {
-        std::cout << "Livro indisponível para aluguel." << std::endl;
-    } else {
-        disponivel = false;
-        // GerenciarAluguel::alugarLivro(titulo);  // Adiciona o livro à lista de livros alugados
-        std::cout << "Livro alugado com sucesso." << std::endl;
-    }
+PerfilUsuario::PerfilUsuario(const std::string& nome, const std::string& email, const int livros) : _nome_perfil_usuario(nome), _email_perfil_usuario(email), _livrosAlugados(livros), _papel(ALUNO)
+{
 }
 
-void Livro::devolver() {
-    if (disponivel) {
-        std::cout << "Livro já está disponível, não pode ser devolvido." << std::endl;
-    } else {
-        disponivel = true;
-        //GerenciarAluguel::devolverLivro(titulo);  // Remove o livro da lista de livros alugados
-        std::cout << "Livro devolvido com sucesso." << std::endl;
-    }
+//métodos
+const std::string& PerfilUsuario::getNomeUsuario() const {
+    return _nome_perfil_usuario;
 }
 
-std::string Livro::getTitulo() const {
-    return titulo;
+const std::string& PerfilUsuario::getEmailUsuario() const {
+    return _email_perfil_usuario;
 }
 
-std::string Livro::getAutor() const {
-    return autor;
+Papel_do_usuario PerfilUsuario::getPapelUsuario() const {
+    return _papel;
 }
 
-int Livro::getAnoPublicacao() const {
-    return anoPublicacao;
+int PerfilUsuario::getLivrosAlugados() const {
+    return _livrosAlugados;
 }
 
-bool Livro::getDisponivel() const {
-    return disponivel;
+void PerfilUsuario::setNomeUsuario(std::string nome) {
+    _nome_perfil_usuario = nome;
+}
+
+void PerfilUsuario::setEmailUsuario(std::string email) {
+    _email_perfil_usuario = email;
+}
+
+void PerfilUsuario::setPapelUsuario(Papel_do_usuario papel) {
+    _papel = papel;
+}
+
+void PerfilUsuario::setLivrosAlugados(int livros) {
+    _livrosAlugados = livros;
 }
 
 
-void Livro::setTitulo(const std::string novotitulo) {
-    titulo = novotitulo;
-    return;
+std::string PerfilUsuario::papelToString() const {
+    return (_papel == ADMIN) ? "ADMIN" : "ALUNO";
 }
 
-void Livro::setAutor(const std::string novoautor) {
-    autor = novoautor;
-    return;
-}
-
-void Livro::setAnoPublicacao(const int novoano) {
-    anoPublicacao = novoano;
-    return;
-}
-
-void Livro::setDisponivel(const bool disp) {
-    disponivel = disp;
-    return;
-}
-
-bool Livro::estaAlugado() const {
-    return !disponivel;
-}
-
-void Livro::alterarLivro(const std::string& novoTitulo, const std::string& novoAutor, int novoAnoPublicacao) {
-    using namespace std;
-
-    titulo = novoTitulo;
-    autor = novoAutor;
-    anoPublicacao = novoAnoPublicacao;
-
-    cout << "Livro alterado com sucesso." << endl;
-}
-
-void Livro::deCSV(const std::string& linha){
+void PerfilUsuario::deCSV(const std::string& linha){
   std::istringstream ss(linha);
-  std::string aux;
+  std::string aux; 
 
-  std::getline(ss,titulo,',');
-  std::getline(ss,autor,',');
+  std::getline(ss,_nome_perfil_usuario,',');
+  std::getline(ss,_email_perfil_usuario,',');
   std::getline(ss,aux,',');
-  anoPublicacao = std::stoi(aux);
+  _livrosAlugados = std::stoi(aux);
   std::getline(ss,aux,',');
   //remover espacos em branco
   aux.erase(std::remove_if(aux.begin(), aux.end(), ::isspace), aux.end());
-  disponivel = (aux == "D" ? true : false); 
+  _papel = (aux == "ADMIN" ? ADMIN : ALUNO); 
 }
 
-std::string Livro::paraCSV() const{
+void PerfilUsuario::deCIN(){
+  using namespace std;
+  std::string aux; 
+
+  std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+  cout << "Digite o nome:";
+  getline(cin,_nome_perfil_usuario);
+  cout << "Digite o email:";
+  getline(cin,_email_perfil_usuario);
+  cout << "Digite o numero de livros alugados:";
+  if (cin >> _livrosAlugados){
+    cin.get();
+    cout << "ALUNO ou ADMIN:";
+    getline(cin,aux);
+    aux.erase(remove_if(aux.begin(), aux.end(), ::isspace), aux.end());
+    if (aux == "ALUNO"){
+      _papel = ALUNO;
+    } else {
+      _papel = ADMIN;  
+    } 
+  } else {
+    cin.get();
+    cout<< "Numero de livros invalido" << endl;
+  }
+  return;
+}
+
+
+std::string PerfilUsuario::paraCSV(){
   std::ostringstream oss;
 
-  oss << titulo << ", "
-      << autor << ", "
-      << anoPublicacao << ", "
-      << (disponivel ? "D" : "I");
+  std::string aux = (_papel == ADMIN ? "ADMIN" : "ALUNO");
+
+  oss << _nome_perfil_usuario << ","
+      << _email_perfil_usuario << ","
+      << _livrosAlugados << ","
+      << aux;
 
   return oss.str();
 }
 
-void Livro::deCIN(){
-  using namespace std;
-  string aux;
-
-  std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-  cout << "Digite o título: ";
-  getline(cin, titulo);
-  cout << "Digite o autor: ";
-  getline(cin, autor);
-  cout << "Digite o ano de publicacao: ";
-  if (cin >> anoPublicacao){
-    disponivel = true;
-  } else {
-    std::cout << "Ano invalido" << std::endl;
-  }
-  std::cin.get();
+// destrutor virtual
+PerfilUsuario::~PerfilUsuario() {
 }
+
+void PerfilUsuario::apenasparatornarpolimorfica() const{ }
